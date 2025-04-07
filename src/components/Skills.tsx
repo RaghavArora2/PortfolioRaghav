@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Users, MessageSquare, BriefcaseIcon, Clock, Handshake, Brain, Target } from 'lucide-react';
 import { FaJava, FaReact, FaNodeJs, FaDocker, FaAws, FaWordpress, FaHtml5, FaCss3 } from 'react-icons/fa';
-import { SiSpringboot, SiMongodb, SiPostman, SiWix, SiKalilinux, SiJavascript, SiMysql } from 'react-icons/si';
+import { SiSpringboot, SiMongodb, SiPostman, SiWix, SiKalilinux, SiJavascript, SiMysql, SiExpress } from 'react-icons/si';
 
 interface SkillProps {
   icon: any;
@@ -101,23 +101,25 @@ const Skills = () => {
   const [filter, setFilter] = useState('all');
 
   const techSkills = [
-    { icon: FaJava, label: 'Java', color: 'bg-orange-100 text-orange-600', category: 'backend' },
-    { icon: SiJavascript, label: 'JavaScript', color: 'bg-yellow-100 text-yellow-600', category: 'frontend' },
-    { icon: FaReact, label: 'React', color: 'bg-blue-100 text-blue-600', category: 'frontend' },
-    { icon: FaHtml5, label: 'HTML5', color: 'bg-red-100 text-red-600', category: 'frontend' },
-    { icon: FaCss3, label: 'CSS3', color: 'bg-blue-100 text-blue-600', category: 'frontend' },
-    { icon: SiSpringboot, label: 'Spring Boot', color: 'bg-green-100 text-green-600', category: 'backend' },
-    { icon: FaNodeJs, label: 'Node.js', color: 'bg-green-100 text-green-600', category: 'backend' },
-    { icon: SiMysql, label: 'MySQL', color: 'bg-blue-100 text-blue-600', category: 'backend' },
-    { icon: SiMongodb, label: 'MongoDB', color: 'bg-green-100 text-green-600', category: 'backend' },
-    { icon: FaDocker, label: 'Docker', color: 'bg-blue-100 text-blue-600', category: 'tools' },
-    { icon: FaAws, label: 'AWS', color: 'bg-orange-100 text-orange-600', category: 'tools' },
-    { icon: SiPostman, label: 'Postman', color: 'bg-orange-100 text-orange-600', category: 'tools' },
-    { icon: 'BI', label: 'Power BI', color: 'bg-yellow-100 text-yellow-600', category: 'tools' },
-    { icon: FaWordpress, label: 'WordPress', color: 'bg-blue-100 text-blue-600', category: 'tools' },
-    { icon: SiWix, label: 'Wix', color: 'bg-purple-100 text-purple-600', category: 'tools' },
-    { icon: SiKalilinux, label: 'Kali Linux', color: 'bg-red-100 text-red-600', category: 'tools' }
-  ];
+  { icon: FaJava, label: 'Java', color: 'bg-orange-100 text-orange-600', category: 'backend' },
+  { icon: SiJavascript, label: 'JavaScript', color: 'bg-yellow-100 text-yellow-600', category: 'frontend' },
+  { icon: FaReact, label: 'React', color: 'bg-blue-100 text-blue-600', category: 'frontend' },
+  { icon: FaHtml5, label: 'HTML5', color: 'bg-red-100 text-red-600', category: 'frontend' },
+  { icon: FaCss3, label: 'CSS3', color: 'bg-blue-100 text-blue-600', category: 'frontend' },
+  { icon: SiSpringboot, label: 'Spring Boot', color: 'bg-green-100 text-green-600', category: 'backend' },
+  { icon: FaNodeJs, label: 'Node.js', color: 'bg-green-100 text-green-600', category: 'backend' },
+  { icon: SiExpress, label: 'Express.js', color: 'bg-gray-100 text-gray-700', category: 'backend' },
+  { icon: SiMysql, label: 'MySQL', color: 'bg-blue-100 text-blue-600', category: 'backend' },
+  { icon: SiMongodb, label: 'MongoDB', color: 'bg-green-100 text-green-600', category: 'backend' },
+  { icon: FaDocker, label: 'Docker', color: 'bg-blue-100 text-blue-600', category: 'tools' },
+  { icon: FaAws, label: 'AWS', color: 'bg-orange-100 text-orange-600', category: 'tools' },
+  { icon: SiPostman, label: 'Postman', color: 'bg-orange-100 text-orange-600', category: 'tools' },
+  { icon: 'BI', label: 'Power BI', color: 'bg-yellow-100 text-yellow-600', category: 'tools' },
+  { icon: FaWordpress, label: 'WordPress', color: 'bg-blue-100 text-blue-600', category: 'tools' },
+  { icon: SiWix, label: 'Wix', color: 'bg-purple-100 text-purple-600', category: 'tools' },
+  { icon: SiKalilinux, label: 'Kali Linux', color: 'bg-red-100 text-red-600', category: 'tools' }
+];
+
 
   const softSkills = [
     { icon: BriefcaseIcon, label: 'Technical Sales', color: 'bg-blue-100 text-blue-600', category: 'soft' },
