@@ -1,3 +1,3 @@
-# PortfolioRaghav
+# 🌐 Raghav Arora - Developer Portfolio
 
-[Edit in StackBlitz next generation editor ⚡️](https://stackblitz.com/~/github.com/RaghavArora2/PortfolioRaghav)
+This is my personal developer portfolio built to showcase my technical skills, freelance projects, and work experience in a visually engaging and interactive format.
