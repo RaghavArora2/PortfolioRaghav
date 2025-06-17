@@ -115,7 +115,7 @@ const Hero = () => {
             </div>
 
             <a
-              href="https://drive.google.com/file/d/1yKTi2gzocIUn0T4ZQOaCzbkdHBZ2VEoA/view?usp=sharing"
+              href="https://drive.google.com/file/d/1LKfT_xnzJSdKsMJ5BM9KyshecP0VzaTL/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -160,7 +160,7 @@ const Hero = () => {
             transition={{ type: 'spring', stiffness: 300 }}
           >
             <img
-              src="https://media.licdn.com/dms/image/v2/D5603AQFD5fs7yldDgw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588715860?e=1749686400&v=beta&t=M7gQ6nVTOlXdinPaePRR-FUIaJrKw57S2McbHFPqvK4"
+              src="https://media.licdn.com/dms/image/v2/D5603AQFD5fs7yldDgw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588715860?e=1755734400&v=beta&t=jQ-A-nfjVW6KiVNqcW1zu5IyhGTMcRTOAZBwm5A5wDM"
               alt="Raghav Arora"
               className="w-full h-full object-cover"
             />
