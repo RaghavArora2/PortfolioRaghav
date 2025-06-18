@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, ExternalLink, Github, Video, BarChart3, Bitcoin } from 'lucide-react';
+import { Code, ExternalLink, Github, Video, BarChart3, Bitcoin, X, Sparkles } from 'lucide-react';
 
 interface ProjectDetails {
   title: string;
@@ -10,6 +10,7 @@ interface ProjectDetails {
   demoUrl?: string;
   githubUrl: string;
   image: string;
+  featured?: boolean;
 }
 
 const ProjectCard = ({ 
@@ -28,16 +29,32 @@ const ProjectCard = ({
   const [isExpanded, setIsExpanded] = useState(false);
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-    hover: { y: -5 }
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    },
+    hover: { 
+      y: -10,
+      scale: 1.02,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
   };
 
   const modalVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: { 
       opacity: 1, 
       scale: 1,
+      y: 0,
       transition: {
         type: "spring",
         stiffness: 300,
@@ -46,9 +63,10 @@ const ProjectCard = ({
     },
     exit: { 
       opacity: 0, 
-      scale: 0.9,
+      scale: 0.8,
+      y: 50,
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     }
   };
@@ -60,68 +78,107 @@ const ProjectCard = ({
         initial="hidden"
         animate="visible"
         whileHover="hover"
-        className="relative"
+        className="relative group cursor-pointer"
         onClick={() => setIsExpanded(true)}
       >
-        <div className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all overflow-hidden cursor-pointer">
-          <div className="relative h-48 overflow-hidden">
-            <img 
+        <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden relative">
+          {details.featured && (
+            <div className="absolute top-4 right-4 z-10">
+              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                <Sparkles className="w-3 h-3" />
+                Featured
+              </div>
+            </div>
+          )}
+
+          <div className="relative h-56 overflow-hidden">
+            <motion.img 
               src={details.image} 
               alt={title}
-              className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.6 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-4 left-4 flex items-center gap-2">
-              <div className="p-2 bg-white/90 backdrop-blur-sm rounded-lg">
-                <Icon className="w-5 h-5 text-blue-600" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            
+            {/* Floating icon */}
+            <motion.div 
+              className="absolute top-4 left-4 p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              <Icon className="w-6 h-6 text-blue-600" />
+            </motion.div>
+
+            <div className="absolute bottom-4 left-4 right-4">
+              <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {tech.split(',').slice(0, 3).map((t, i) => (
+                  <span
+                    key={i}
+                    className="px-2 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium"
+                  >
+                    {t.trim()}
+                  </span>
+                ))}
+                {tech.split(',').length > 3 && (
+                  <span className="px-2 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium">
+                    +{tech.split(',').length - 3} more
+                  </span>
+                )}
               </div>
-              <h3 className="text-lg font-bold text-white">{title}</h3>
             </div>
           </div>
 
           <div className="p-6">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {tech.split(',').map((t, i) => (
-                <span
-                  key={i}
-                  className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium"
-                >
-                  {t.trim()}
-                </span>
+            <ul className="space-y-2 mb-6">
+              {description.slice(0, 2).map((item, index) => (
+                <li key={index} className="text-gray-600 text-sm flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                  {item}
+                </li>
               ))}
-            </div>
-
-            <ul className="space-y-2 mb-4">
-              {description.map((item, index) => (
-                <li key={index} className="text-gray-600 text-sm">• {item}</li>
-              ))}
+              {description.length > 2 && (
+                <li className="text-gray-500 text-sm italic">
+                  +{description.length - 2} more features...
+                </li>
+              )}
             </ul>
 
             <div className="flex gap-3">
               {details.demoUrl && (
-                <a
+                <motion.a
                   href={details.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-blue-600 hover:text-blue-700 text-sm"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium"
                   onClick={(e) => e.stopPropagation()}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <ExternalLink size={16} />
                   Live Demo
-                </a>
+                </motion.a>
               )}
-              <a
+              <motion.a
                 href={details.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-gray-600 hover:text-gray-700 text-sm"
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-700 text-sm font-medium"
                 onClick={(e) => e.stopPropagation()}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <Github size={16} />
                 Source Code
-              </a>
+              </motion.a>
             </div>
           </div>
+
+          {/* Hover overlay */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+            initial={false}
+          />
         </div>
       </motion.div>
 
@@ -131,7 +188,7 @@ const ProjectCard = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             onClick={() => setIsExpanded(false)}
           >
             <motion.div
@@ -139,52 +196,77 @@ const ProjectCard = ({
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src={details.image} 
-                alt={title}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">{title}</h3>
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="absolute top-4 right-4 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="relative h-80 overflow-hidden">
+                <img 
+                  src={details.image} 
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-3xl font-bold text-white mb-2">{title}</h3>
+                  {details.featured && (
+                    <div className="inline-flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                      <Sparkles className="w-4 h-4" />
+                      Featured Project
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-8">
                 <div className="flex flex-wrap gap-2 mb-6">
                   {details.tech.map((t, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="space-y-4 mb-6">
+
+                <div className="space-y-4 mb-8">
                   {details.description.map((desc, i) => (
-                    <p key={i} className="text-gray-600">{desc}</p>
+                    <p key={i} className="text-gray-600 leading-relaxed">{desc}</p>
                   ))}
                 </div>
+
                 <div className="flex gap-4">
                   {details.demoUrl && (
-                    <a
+                    <motion.a
                       href={details.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       <ExternalLink size={18} />
                       View Live Demo
-                    </a>
+                    </motion.a>
                   )}
-                  <a
+                  <motion.a
                     href={details.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-xl font-semibold hover:bg-gray-900 transition-colors"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Github size={18} />
                     View Source Code
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
@@ -201,6 +283,16 @@ const Projects = () => {
     threshold: 0.1,
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   const projects = [
     {
       icon: Video,
@@ -214,14 +306,15 @@ const Projects = () => {
       details: {
         title: "Video Chat App",
         description: [
-          "Real-time video calling application built with Spring Boot",
-          "Uses ZegoCloud for reliable video and audio streaming",
-          "Supports multiple participants and includes chat functionality",
-          "Implements WebRTC for peer-to-peer communication"
+          "A sophisticated real-time video calling application built with Spring Boot backend architecture, designed to handle multiple concurrent video sessions with high performance and reliability.",
+          "Integrated ZegoCloud SDK for professional-grade video and audio streaming capabilities, ensuring crystal-clear communication across different network conditions.",
+          "Features include multi-participant video calls, real-time text chat, screen sharing capabilities, and robust connection management with automatic reconnection.",
+          "Implemented WebRTC protocols for peer-to-peer communication, reducing latency and improving overall user experience during video calls."
         ],
-        tech: ["Spring Boot", "ZegoCloud", "WebRTC", "WebSocket"],
+        tech: ["Spring Boot", "ZegoCloud SDK", "WebRTC", "WebSocket", "Java", "REST API"],
         githubUrl: "https://github.com/RaghavArora2/VideoChatApplication",
-        image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80"
+        image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80",
+        featured: true
       }
     },
     {
@@ -236,14 +329,15 @@ const Projects = () => {
       details: {
         title: "Market Dashboard in Power BI",
         description: [
-          "Comprehensive financial dashboard for tracking ETFs, cryptocurrencies, and stocks",
-          "Integrates Power BI with Python scripts for data processing",
-          "Features real-time market data visualization and analysis tools",
-          "Custom DAX measures for financial calculations"
+          "A comprehensive financial analytics dashboard that provides real-time insights into ETFs, cryptocurrencies, and stock market performance with interactive visualizations.",
+          "Seamlessly integrates Power BI with Python scripts for advanced data processing, enabling complex financial calculations and predictive analytics.",
+          "Features dynamic charts, trend analysis, portfolio performance tracking, and customizable alerts for market movements and investment opportunities.",
+          "Utilizes custom DAX measures and calculated columns for sophisticated financial metrics including ROI, volatility analysis, and risk assessment."
         ],
-        tech: ["Power BI", "Python", "Financial APIs", "DAX"],
+        tech: ["Power BI", "Python", "Financial APIs", "DAX", "Data Modeling", "ETL"],
         githubUrl: "https://github.com/RaghavArora2/Market-Dashboard-Project-in-Power-BI",
-        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80"
+        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80",
+        featured: true
       }
     },
     {
@@ -258,12 +352,12 @@ const Projects = () => {
       details: {
         title: "ShambhalaTrade",
         description: [
-          "Professional-grade cryptocurrency trading platform",
-          "Real-time order execution and market data streaming",
-          "Advanced technical analysis tools and custom indicators",
-          "Portfolio management and trade history tracking"
+          "A professional-grade cryptocurrency trading platform built with modern web technologies, offering institutional-level trading capabilities for retail investors.",
+          "Features real-time order execution engine with WebSocket connections for instant market data updates and lightning-fast trade processing.",
+          "Includes comprehensive technical analysis suite with 20+ indicators, customizable charts, and advanced order types including stop-loss and take-profit.",
+          "Implements robust portfolio management system with detailed trade history, P&L tracking, and risk management tools for informed trading decisions."
         ],
-        tech: ["React", "Node.js", "WebSocket", "Trading APIs"],
+        tech: ["React", "Node.js", "WebSocket", "Trading APIs", "Chart.js", "MongoDB"],
         githubUrl: "https://github.com/RaghavArora2/ShambhalaTrade",
         image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80"
       }
@@ -280,12 +374,12 @@ const Projects = () => {
       details: {
         title: "AvedhaneAnuchintan",
         description: [
-          "Modern therapy and counseling website with React and TypeScript",
-          "Intuitive appointment scheduling and client management",
-          "Fully responsive design with accessibility features",
-          "Secure patient data handling and communication"
+          "A modern, compassionate therapy and counseling platform designed to connect mental health professionals with clients seeking support and guidance.",
+          "Features an intuitive appointment scheduling system with calendar integration, automated reminders, and flexible booking options for both therapists and clients.",
+          "Built with accessibility-first design principles, ensuring the platform is usable by individuals with diverse needs and technical abilities.",
+          "Implements secure patient data handling with HIPAA-compliant practices and encrypted communication channels for confidential therapeutic sessions."
         ],
-        tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+        tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Calendar API", "Security"],
         demoUrl: "https://avedhaneanuchintan.netlify.app/",
         githubUrl: "https://github.com/RaghavArora2/AvedhaneAnuchintan",
         image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&q=80"
@@ -303,12 +397,12 @@ const Projects = () => {
       details: {
         title: "CryptoTrading Platform",
         description: [
-          "Streamlined cryptocurrency trading platform",
-          "Real-time price updates and market data visualization",
-          "Intuitive trading interface for beginners",
-          "Basic portfolio tracking and analysis tools"
+          "A streamlined cryptocurrency trading platform designed specifically for beginners entering the crypto market, with an emphasis on simplicity and education.",
+          "Provides real-time price updates and market data visualization through interactive charts and graphs, helping users understand market trends and patterns.",
+          "Features an intuitive trading interface that guides new users through their first cryptocurrency purchases with helpful tooltips and educational content.",
+          "Includes basic portfolio tracking tools and performance analytics to help users monitor their investments and learn from their trading decisions."
         ],
-        tech: ["TypeScript", "React", "Tailwind CSS", "CryptoAPI"],
+        tech: ["TypeScript", "React", "Tailwind CSS", "CryptoAPI", "Chart Libraries", "Responsive Design"],
         demoUrl: "https://cryptotradeplat.netlify.app/",
         githubUrl: "https://github.com/RaghavArora2/CryptocurrencyPlatform",
         image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&q=80"
@@ -317,22 +411,44 @@ const Projects = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 px-4 relative" id="projects">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 px-4 relative overflow-hidden" id="projects">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 mb-12"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          Projects
-        </motion.h2>
+          <motion.h2 
+            className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6 relative inline-block"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Code className="inline-block mr-3 text-blue-600" />
+            Featured Projects
+            <motion.div
+              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded"
+              initial={{ width: "0%" }}
+              animate={inView ? { width: "100%" } : {}}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
+          </motion.h2>
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            Showcasing innovative solutions and cutting-edge technologies
+          </p>
+        </motion.div>
         
         <motion.div
           ref={ref}
+          variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
