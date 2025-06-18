@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Code, ExternalLink, Github, Video, BarChart3, Bitcoin, X, Sparkles } from 'lucide-react';
+import { Code, ExternalLink, Github, Video, BarChart3, Bitcoin, X, Sparkles, ArrowRight } from 'lucide-react';
 
 interface ProjectDetails {
   title: string;
@@ -35,38 +35,38 @@ const ProjectCard = ({
       y: 0, 
       scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.4,
         ease: "easeOut"
       }
     },
     hover: { 
-      y: -10,
+      y: -8,
       scale: 1.02,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
         ease: "easeOut"
       }
     }
   };
 
   const modalVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 50 },
+    hidden: { opacity: 0, scale: 0.9, y: 20 },
     visible: { 
       opacity: 1, 
       scale: 1,
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30
+        stiffness: 400,
+        damping: 25
       }
     },
     exit: { 
       opacity: 0, 
-      scale: 0.8,
-      y: 50,
+      scale: 0.9,
+      y: 20,
       transition: {
-        duration: 0.3
+        duration: 0.2
       }
     }
   };
@@ -81,7 +81,7 @@ const ProjectCard = ({
         className="relative group cursor-pointer"
         onClick={() => setIsExpanded(true)}
       >
-        <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden relative">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden relative border border-gray-200/20 dark:border-gray-700/20">
           {details.featured && (
             <div className="absolute top-4 right-4 z-10">
               <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
@@ -91,26 +91,26 @@ const ProjectCard = ({
             </div>
           )}
 
-          <div className="relative h-56 overflow-hidden">
+          <div className="relative h-48 overflow-hidden">
             <motion.img 
               src={details.image} 
               alt={title}
               className="w-full h-full object-cover"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
             
             {/* Floating icon */}
             <motion.div 
-              className="absolute top-4 left-4 p-3 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg"
+              className="absolute top-4 left-4 p-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg"
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
-              <Icon className="w-6 h-6 text-blue-600" />
+              <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </motion.div>
 
             <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
               <div className="flex flex-wrap gap-2">
                 {tech.split(',').slice(0, 3).map((t, i) => (
                   <span
@@ -122,7 +122,7 @@ const ProjectCard = ({
                 ))}
                 {tech.split(',').length > 3 && (
                   <span className="px-2 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium">
-                    +{tech.split(',').length - 3} more
+                    +{tech.split(',').length - 3}
                   </span>
                 )}
               </div>
@@ -132,51 +132,56 @@ const ProjectCard = ({
           <div className="p-6">
             <ul className="space-y-2 mb-6">
               {description.slice(0, 2).map((item, index) => (
-                <li key={index} className="text-gray-600 text-sm flex items-start gap-2">
+                <li key={index} className="text-gray-600 dark:text-gray-400 text-sm flex items-start gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
                   {item}
                 </li>
               ))}
-              {description.length > 2 && (
-                <li className="text-gray-500 text-sm italic">
-                  +{description.length - 2} more features...
-                </li>
-              )}
             </ul>
 
-            <div className="flex gap-3">
-              {details.demoUrl && (
+            <div className="flex items-center justify-between">
+              <div className="flex gap-3">
+                {details.demoUrl && (
+                  <motion.a
+                    href={details.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm font-medium"
+                    onClick={(e) => e.stopPropagation()}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ExternalLink size={14} />
+                    Demo
+                  </motion.a>
+                )}
                 <motion.a
-                  href={details.demoUrl}
+                  href={details.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-sm font-medium"
                   onClick={(e) => e.stopPropagation()}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <ExternalLink size={16} />
-                  Live Demo
+                  <Github size={14} />
+                  Code
                 </motion.a>
-              )}
-              <motion.a
-                href={details.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-700 text-sm font-medium"
-                onClick={(e) => e.stopPropagation()}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </div>
+              
+              <motion.div
+                className="flex items-center gap-1 text-blue-600 dark:text-blue-400 text-sm font-medium"
+                whileHover={{ x: 5 }}
               >
-                <Github size={16} />
-                Source Code
-              </motion.a>
+                View Details
+                <ArrowRight size={14} />
+              </motion.div>
             </div>
           </div>
 
           {/* Hover overlay */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
             initial={false}
           />
         </div>
@@ -196,17 +201,17 @@ const ProjectCard = ({
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+              className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setIsExpanded(false)}
-                className="absolute top-4 right-4 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="relative h-80 overflow-hidden">
+              <div className="relative h-64 overflow-hidden">
                 <img 
                   src={details.image} 
                   alt={title}
@@ -229,7 +234,7 @@ const ProjectCard = ({
                   {details.tech.map((t, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+                      className="px-3 py-1 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium border border-blue-200/50 dark:border-blue-700/50"
                     >
                       {t}
                     </span>
@@ -238,7 +243,7 @@ const ProjectCard = ({
 
                 <div className="space-y-4 mb-8">
                   {details.description.map((desc, i) => (
-                    <p key={i} className="text-gray-600 leading-relaxed">{desc}</p>
+                    <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed">{desc}</p>
                   ))}
                 </div>
 
@@ -260,7 +265,7 @@ const ProjectCard = ({
                     href={details.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-xl font-semibold hover:bg-gray-900 transition-colors"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-800 dark:bg-gray-700 text-white rounded-xl font-semibold hover:bg-gray-900 dark:hover:bg-gray-600 transition-colors"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -288,7 +293,7 @@ const Projects = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -411,34 +416,28 @@ const Projects = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 px-4 relative overflow-hidden" id="projects">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl" />
-      </div>
-
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 px-4 relative overflow-hidden" id="projects">
       <div className="max-w-7xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <motion.h2 
-            className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6 relative inline-block"
+            className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-200 mb-6 relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            <Code className="inline-block mr-3 text-blue-600" />
+            <Code className="inline-block mr-3 text-blue-600 dark:text-blue-400" />
             Featured Projects
             <motion.div
               className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded"
               initial={{ width: "0%" }}
               animate={inView ? { width: "100%" } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1, delay: 0.3 }}
             />
           </motion.h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-3xl mx-auto">
             Showcasing innovative solutions and cutting-edge technologies
           </p>
         </motion.div>

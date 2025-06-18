@@ -10,10 +10,9 @@ interface SkillProps {
   label: string;
   color: string;
   category: string;
-  level: number;
 }
 
-const SkillIcon = ({ icon: Icon, label, color, level }: SkillProps) => {
+const SkillIcon = ({ icon: Icon, label, color }: SkillProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const iconVariants = {
@@ -29,18 +28,6 @@ const SkillIcon = ({ icon: Icon, label, color, level }: SkillProps) => {
     }
   };
 
-  const progressVariants = {
-    initial: { width: "0%" },
-    animate: { 
-      width: `${level}%`,
-      transition: {
-        duration: 1.5,
-        ease: "easeOut",
-        delay: 0.2
-      }
-    }
-  };
-
   return (
     <motion.div
       variants={iconVariants}
@@ -51,12 +38,12 @@ const SkillIcon = ({ icon: Icon, label, color, level }: SkillProps) => {
       className="relative group"
     >
       <motion.div
-        className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all relative overflow-hidden"
+        className="flex flex-col items-center p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all relative overflow-hidden border border-gray-200/20 dark:border-gray-700/20"
         whileHover={{ y: -5 }}
       >
         {/* Animated background */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 opacity-0 group-hover:opacity-100 transition-opacity"
           initial={false}
         />
         
@@ -76,21 +63,9 @@ const SkillIcon = ({ icon: Icon, label, color, level }: SkillProps) => {
           />
         </div>
         
-        <span className="text-sm font-semibold text-gray-700 mb-3 text-center relative z-10">
+        <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 text-center relative z-10">
           {label}
         </span>
-        
-        {/* Skill level progress bar */}
-        <div className="w-full bg-gray-200 rounded-full h-2 relative z-10">
-          <motion.div
-            className="h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-            variants={progressVariants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          />
-        </div>
-        <span className="text-xs text-gray-500 mt-1 relative z-10">{level}%</span>
         
         {/* Floating particles */}
         {isHovered && (
@@ -133,7 +108,7 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   };
@@ -153,7 +128,7 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
       className="mb-20"
     >
       <motion.h3 
-        className="text-3xl font-bold text-gray-800 mb-12 text-center relative"
+        className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-12 text-center relative"
         initial={{ opacity: 0, y: -20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
       >
@@ -167,7 +142,7 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
       </motion.h3>
       
       <motion.div 
-        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8"
+        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
         variants={containerVariants}
       >
         {filteredSkills.map((skill, index) => (
@@ -199,33 +174,33 @@ const Skills = () => {
   const [filter, setFilter] = useState('all');
 
   const techSkills = [
-    { icon: FaJava, label: 'Java', color: 'bg-orange-100 text-orange-600', category: 'backend', level: 90 },
-    { icon: SiJavascript, label: 'JavaScript', color: 'bg-yellow-100 text-yellow-600', category: 'frontend', level: 85 },
-    { icon: FaReact, label: 'React', color: 'bg-blue-100 text-blue-600', category: 'frontend', level: 88 },
-    { icon: FaHtml5, label: 'HTML5', color: 'bg-red-100 text-red-600', category: 'frontend', level: 95 },
-    { icon: FaCss3, label: 'CSS3', color: 'bg-blue-100 text-blue-600', category: 'frontend', level: 90 },
-    { icon: SiSpringboot, label: 'Spring Boot', color: 'bg-green-100 text-green-600', category: 'backend', level: 92 },
-    { icon: FaNodeJs, label: 'Node.js', color: 'bg-green-100 text-green-600', category: 'backend', level: 80 },
-    { icon: SiExpress, label: 'Express.js', color: 'bg-gray-100 text-gray-700', category: 'backend', level: 78 },
-    { icon: SiMysql, label: 'MySQL', color: 'bg-blue-100 text-blue-600', category: 'backend', level: 85 },
-    { icon: SiMongodb, label: 'MongoDB', color: 'bg-green-100 text-green-600', category: 'backend', level: 82 },
-    { icon: FaDocker, label: 'Docker', color: 'bg-blue-100 text-blue-600', category: 'tools', level: 75 },
-    { icon: FaAws, label: 'AWS', color: 'bg-orange-100 text-orange-600', category: 'tools', level: 70 },
-    { icon: SiPostman, label: 'Postman', color: 'bg-orange-100 text-orange-600', category: 'tools', level: 90 },
-    { icon: 'BI', label: 'Power BI', color: 'bg-yellow-100 text-yellow-600', category: 'tools', level: 85 },
-    { icon: FaWordpress, label: 'WordPress', color: 'bg-blue-100 text-blue-600', category: 'tools', level: 80 },
-    { icon: SiWix, label: 'Wix', color: 'bg-purple-100 text-purple-600', category: 'tools', level: 75 },
-    { icon: SiKalilinux, label: 'Kali Linux', color: 'bg-red-100 text-red-600', category: 'tools', level: 70 }
+    { icon: FaJava, label: 'Java', color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', category: 'backend' },
+    { icon: SiJavascript, label: 'JavaScript', color: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400', category: 'frontend' },
+    { icon: FaReact, label: 'React', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'frontend' },
+    { icon: FaHtml5, label: 'HTML5', color: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400', category: 'frontend' },
+    { icon: FaCss3, label: 'CSS3', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'frontend' },
+    { icon: SiSpringboot, label: 'Spring Boot', color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400', category: 'backend' },
+    { icon: FaNodeJs, label: 'Node.js', color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400', category: 'backend' },
+    { icon: SiExpress, label: 'Express.js', color: 'bg-gray-100 text-gray-700 dark:bg-gray-700/30 dark:text-gray-300', category: 'backend' },
+    { icon: SiMysql, label: 'MySQL', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'backend' },
+    { icon: SiMongodb, label: 'MongoDB', color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400', category: 'backend' },
+    { icon: FaDocker, label: 'Docker', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'tools' },
+    { icon: FaAws, label: 'AWS', color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', category: 'tools' },
+    { icon: SiPostman, label: 'Postman', color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', category: 'tools' },
+    { icon: 'BI', label: 'Power BI', color: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400', category: 'tools' },
+    { icon: FaWordpress, label: 'WordPress', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'tools' },
+    { icon: SiWix, label: 'Wix', color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400', category: 'tools' },
+    { icon: SiKalilinux, label: 'Kali Linux', color: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400', category: 'tools' }
   ];
 
   const softSkills = [
-    { icon: BriefcaseIcon, label: 'Technical Sales', color: 'bg-blue-100 text-blue-600', category: 'soft', level: 90 },
-    { icon: Target, label: 'Marketing', color: 'bg-red-100 text-red-600', category: 'soft', level: 85 },
-    { icon: Handshake, label: 'Customer Success', color: 'bg-green-100 text-green-600', category: 'soft', level: 88 },
-    { icon: MessageSquare, label: 'Communication', color: 'bg-purple-100 text-purple-600', category: 'soft', level: 92 },
-    { icon: Users, label: 'Leadership', color: 'bg-yellow-100 text-yellow-600', category: 'soft', level: 80 },
-    { icon: Brain, label: 'Problem Solving', color: 'bg-orange-100 text-orange-600', category: 'soft', level: 95 },
-    { icon: Clock, label: 'Time Management', color: 'bg-indigo-100 text-indigo-600', category: 'soft', level: 87 }
+    { icon: BriefcaseIcon, label: 'Technical Sales', color: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', category: 'soft' },
+    { icon: Target, label: 'Marketing', color: 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400', category: 'soft' },
+    { icon: Handshake, label: 'Customer Success', color: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400', category: 'soft' },
+    { icon: MessageSquare, label: 'Communication', color: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400', category: 'soft' },
+    { icon: Users, label: 'Leadership', color: 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400', category: 'soft' },
+    { icon: Brain, label: 'Problem Solving', color: 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', category: 'soft' },
+    { icon: Clock, label: 'Time Management', color: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400', category: 'soft' }
   ];
 
   const filters = ['all', 'frontend', 'backend', 'tools', 'soft'];
@@ -237,34 +212,28 @@ const Skills = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 px-4 relative overflow-hidden" id="skills">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl" />
-      </div>
-
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 px-4 relative overflow-hidden" id="skills">
       <div className="max-w-7xl mx-auto relative">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
           <motion.h2 
-            className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4 relative inline-block"
+            className="text-4xl lg:text-5xl font-bold text-gray-800 dark:text-gray-200 mb-4 relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
-            <Zap className="inline-block mr-3 text-blue-600" />
+            <Zap className="inline-block mr-3 text-blue-600 dark:text-blue-400" />
             Skills & Expertise
             <motion.div
               className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1, delay: 0.3 }}
             />
           </motion.h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             Mastering cutting-edge technologies to build exceptional digital experiences
           </p>
         </motion.div>
@@ -273,7 +242,7 @@ const Skills = () => {
           className="flex justify-center gap-4 mb-16 flex-wrap"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
         >
           {filters.map((f) => (
             <motion.button
@@ -286,7 +255,7 @@ const Skills = () => {
               className={`px-6 py-3 rounded-full capitalize font-semibold transition-all ${
                 filter === f
                   ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 shadow-md'
+                  : 'bg-white/80 dark:bg-gray-800/80 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-md backdrop-blur-sm border border-gray-200/20 dark:border-gray-700/20'
               }`}
             >
               {f}

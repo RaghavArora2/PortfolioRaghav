@@ -26,7 +26,7 @@ const WhatsAppButton = () => {
       className="fixed bottom-6 left-6 z-50"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ delay: 2, type: "spring", stiffness: 300 }}
+      transition={{ delay: 1, type: "spring", stiffness: 300 }}
     >
       <motion.button
         onClick={handleWhatsAppClick}
@@ -50,10 +50,11 @@ const WhatsAppButton = () => {
         />
         <MessageCircle className="w-6 h-6 relative z-10" />
         
-        {/* Tooltip */}
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-          Chat on WhatsApp
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+        {/* Enhanced Tooltip */}
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 px-4 py-2 bg-gray-900 dark:bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap shadow-xl border border-gray-700">
+          <div className="font-medium">Chat on WhatsApp</div>
+          <div className="text-xs text-gray-300 mt-1">Quick response guaranteed!</div>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
         </div>
       </motion.button>
     </motion.div>
