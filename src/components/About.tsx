@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, Award, BookOpen, Rocket, Code, Heart } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, Rocket, Code, Heart, Star } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -31,19 +31,6 @@ const About = () => {
     },
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [-20, 20],
-      x: [-10, 10],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut"
-      }
-    }
-  };
-
   const EducationCard = ({ 
     icon: Icon, 
     school, 
@@ -68,7 +55,7 @@ const About = () => {
       {/* Timeline line */}
       {!isLast && (
         <motion.div
-          className="absolute left-8 top-20 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 z-0"
+          className="absolute left-8 top-20 w-0.5 bg-gradient-to-b from-purple-400 to-pink-400 z-0"
           initial={{ height: 0 }}
           animate={inView ? { height: "calc(100% + 2rem)" } : {}}
           transition={{ delay: index * 0.2 + 0.5, duration: 1 }}
@@ -78,18 +65,18 @@ const About = () => {
       <motion.div
         variants={itemVariants}
         whileHover={{ scale: 1.02, y: -5 }}
-        className="relative flex gap-6 bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all group overflow-hidden"
+        className="relative flex gap-6 bg-white/5 backdrop-blur-xl p-8 rounded-2xl shadow-2xl hover:shadow-purple-500/20 transition-all group overflow-hidden border border-white/10"
       >
-        {/* Animated background gradient */}
+        {/* Cosmic background gradient */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
           initial={false}
         />
         
-        {/* Timeline dot with pulse effect */}
+        {/* Timeline dot with stellar effect */}
         <div className="relative">
           <motion.div
-            className="absolute -left-3 -top-3 w-16 h-16 bg-blue-100 rounded-full opacity-30"
+            className="absolute -left-3 -top-3 w-16 h-16 bg-purple-400/20 rounded-full opacity-30"
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.3, 0.6, 0.3]
@@ -100,20 +87,20 @@ const About = () => {
               ease: "easeInOut"
             }}
           />
-          <div className="relative p-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl z-10 group-hover:from-blue-200 group-hover:to-purple-200 transition-all">
-            <Icon className="w-7 h-7 text-blue-600" />
+          <div className="relative p-4 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl z-10 group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all border border-purple-500/30">
+            <Icon className="w-7 h-7 text-purple-400" />
           </div>
         </div>
 
         <div className="flex-1 relative z-10">
           <div className="flex items-start justify-between mb-4">
             <div>
-              <h4 className="font-bold text-gray-800 text-xl mb-2">{school}</h4>
-              <p className="text-blue-600 font-medium text-lg">{degree}</p>
+              <h4 className="font-bold text-white/90 text-xl mb-2">{school}</h4>
+              <p className="text-purple-400 font-medium text-lg">{degree}</p>
             </div>
             {year && (
               <motion.span 
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-lg"
+                className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm font-semibold shadow-lg border border-purple-500/30"
                 whileHover={{ scale: 1.05 }}
               >
                 {year}
@@ -123,13 +110,13 @@ const About = () => {
           
           {/* Animated progress indicator */}
           <motion.div
-            className="h-2 bg-gray-100 rounded-full overflow-hidden"
+            className="h-2 bg-white/10 rounded-full overflow-hidden"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+              className="h-full bg-gradient-to-r from-purple-400 to-pink-400"
               initial={{ width: "0%" }}
               whileInView={{ width: "100%" }}
               transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
@@ -150,11 +137,16 @@ const About = () => {
     <motion.div
       variants={itemVariants}
       whileHover={{ scale: 1.05, y: -10 }}
-      className={`p-6 rounded-2xl ${color} shadow-lg hover:shadow-xl transition-all group cursor-pointer`}
+      className={`p-6 rounded-2xl ${color} shadow-2xl hover:shadow-purple-500/25 transition-all group cursor-pointer backdrop-blur-xl border border-white/10`}
     >
       <Icon className="w-8 h-8 text-white mb-4 group-hover:scale-110 transition-transform" />
       <h4 className="text-white font-bold text-lg mb-2">{title}</h4>
       <p className="text-white/90 text-sm">{description}</p>
+      
+      {/* Floating stars */}
+      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Star className="w-4 h-4 text-yellow-300" />
+      </div>
     </motion.div>
   );
 
@@ -164,38 +156,25 @@ const About = () => {
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={containerVariants}
-      className="py-20 bg-white px-4 relative overflow-hidden"
+      className="py-20 bg-transparent px-4 relative overflow-hidden"
       id="about"
     >
-      {/* Animated background elements */}
-      <motion.div
-        className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full filter blur-3xl opacity-20"
-        variants={floatingVariants}
-        animate="animate"
-      />
-      <motion.div
-        className="absolute bottom-0 left-0 w-96 h-96 bg-purple-100 rounded-full filter blur-3xl opacity-20"
-        variants={floatingVariants}
-        animate="animate"
-        custom={1}
-      />
-
       <div className="max-w-6xl mx-auto relative">
         <motion.div variants={itemVariants} className="text-center mb-16">
           <motion.h2 
-            className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6 relative inline-block"
+            className="text-4xl lg:text-5xl font-bold text-white/90 mb-6 relative inline-block"
             whileHover={{ scale: 1.05 }}
           >
             About Me
             <motion.div
-              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded"
+              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-full"
               initial={{ width: "0%" }}
               animate={inView ? { width: "100%" } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
             />
           </motion.h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-relaxed">
-            Passionate about creating digital solutions that make a difference
+          <p className="text-white/70 text-lg max-w-3xl mx-auto leading-relaxed">
+            Passionate about creating digital solutions across the cosmic web
           </p>
         </motion.div>
 
@@ -207,20 +186,20 @@ const About = () => {
           <HighlightCard
             icon={Rocket}
             title="Innovation Driven"
-            description="Always exploring new technologies and pushing boundaries"
-            color="bg-gradient-to-br from-blue-500 to-blue-600"
+            description="Always exploring new technologies and pushing cosmic boundaries"
+            color="bg-gradient-to-br from-purple-500/20 to-purple-600/20"
           />
           <HighlightCard
             icon={Code}
             title="Full Stack Expertise"
-            description="End-to-end development with modern tech stack"
-            color="bg-gradient-to-br from-purple-500 to-purple-600"
+            description="End-to-end development across the digital universe"
+            color="bg-gradient-to-br from-pink-500/20 to-pink-600/20"
           />
           <HighlightCard
             icon={Heart}
             title="Client Focused"
-            description="Building relationships and delivering exceptional results"
-            color="bg-gradient-to-br from-pink-500 to-pink-600"
+            description="Building stellar relationships and delivering exceptional results"
+            color="bg-gradient-to-br from-blue-500/20 to-blue-600/20"
           />
         </motion.div>
 
@@ -230,21 +209,21 @@ const About = () => {
               className="prose prose-lg max-w-none"
               variants={itemVariants}
             >
-              <p className="text-gray-600 leading-relaxed text-lg mb-6">
-                A proactive and versatile engineering student at <span className="font-semibold text-blue-600">Guru Nanak Dev University</span> (B.Tech in CSE, 2021–2025), 
+              <p className="text-white/80 leading-relaxed text-lg mb-6">
+                A proactive and versatile engineering student at <span className="font-semibold text-purple-400">Guru Nanak Dev University</span> (B.Tech in CSE, 2021–2025), 
                 with a solid foundation in software development and a strong inclination towards backend engineering, 
                 web development, and data visualization.
               </p>
               
-              <p className="text-gray-600 leading-relaxed text-lg mb-6">
-                Experienced in <span className="font-semibold text-purple-600">freelance web development</span>, technical consulting, and handling multiple full-cycle projects. 
-                I'm currently working as a <span className="font-semibold text-green-600">Sales Engineer Intern at WellnessZ</span>, where I introduced a new technical 
+              <p className="text-white/80 leading-relaxed text-lg mb-6">
+                Experienced in <span className="font-semibold text-pink-400">freelance web development</span>, technical consulting, and handling multiple full-cycle projects. 
+                I'm currently working as a <span className="font-semibold text-blue-400">Sales Engineer Intern at WellnessZ</span>, where I introduced a new technical 
                 coordination workflow to streamline collaboration between the Sales and CSM teams.
               </p>
 
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-white/80 leading-relaxed text-lg">
                 My journey is driven by a passion for solving complex problems and creating impactful digital experiences 
-                that bridge the gap between technology and human needs.
+                that bridge the gap between technology and human needs across the digital cosmos.
               </p>
             </motion.div>
           </motion.div>
@@ -253,7 +232,7 @@ const About = () => {
             variants={itemVariants}
             className="lg:pl-8"
           >
-            <h3 className="text-3xl font-bold text-gray-800 mb-12 text-center lg:text-left">Education Journey</h3>
+            <h3 className="text-3xl font-bold text-white/90 mb-12 text-center lg:text-left">Education Journey</h3>
             <div className="space-y-12">
               <EducationCard
                 icon={GraduationCap}

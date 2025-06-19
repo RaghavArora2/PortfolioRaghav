@@ -1,9 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Download, ArrowDown, Sparkles } from 'lucide-react';
+import { Download, ArrowDown, Sparkles, Star } from 'lucide-react';
 import CountUp from 'react-countup';
-import ParticleBackground from './ParticleBackground';
 
 const Hero = () => {
   const containerVariants = {
@@ -29,17 +28,6 @@ const Hero = () => {
     },
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
   const StatItem = ({ value, label }: { value: number; label: string }) => (
     <motion.div
       variants={itemVariants}
@@ -47,16 +35,16 @@ const Hero = () => {
       whileHover={{ scale: 1.1 }}
     >
       <motion.div 
-        className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2"
+        className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
       >
         <CountUp end={value} duration={2.5} />+
       </motion.div>
-      <div className="text-gray-600 font-medium">{label}</div>
+      <div className="text-white/70 font-medium">{label}</div>
       <motion.div
-        className="w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="w-full h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity"
         layoutId={`stat-${label}`}
       />
     </motion.div>
@@ -71,29 +59,8 @@ const Hero = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 px-4 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-transparent px-4 relative overflow-hidden"
     >
-      <ParticleBackground />
-      
-      {/* Floating elements */}
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        className="absolute top-20 left-10 w-20 h-20 bg-blue-200/30 rounded-full blur-xl"
-      />
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        custom={1}
-        className="absolute top-40 right-20 w-32 h-32 bg-purple-200/30 rounded-full blur-xl"
-      />
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        custom={2}
-        className="absolute bottom-20 left-1/4 w-24 h-24 bg-pink-200/30 rounded-full blur-xl"
-      />
-
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 z-10">
         <motion.div 
           variants={itemVariants}
@@ -103,7 +70,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, type: "spring" }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium mb-6 backdrop-blur-xl border border-purple-500/30"
           >
             <Sparkles className="w-4 h-4" />
             Available for opportunities
@@ -111,11 +78,11 @@ const Hero = () => {
 
           <motion.h1 
             variants={itemVariants}
-            className="text-5xl lg:text-7xl font-bold text-gray-800 mb-6 leading-tight"
+            className="text-5xl lg:text-7xl font-bold text-white/90 mb-6 leading-tight"
           >
             Hi, I'm{' '}
             <motion.span
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent relative"
+              className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent relative"
               animate={{
                 backgroundPosition: ['0%', '100%', '0%'],
               }}
@@ -127,7 +94,7 @@ const Hero = () => {
             >
               Raghav
               <motion.div
-                className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full"
+                className="absolute -top-2 -right-2 w-4 h-4"
                 animate={{
                   scale: [1, 1.5, 1],
                   rotate: [0, 180, 360],
@@ -136,13 +103,15 @@ const Hero = () => {
                   duration: 2,
                   repeat: Infinity,
                 }}
-              />
+              >
+                <Star className="w-4 h-4 text-yellow-300" />
+              </motion.div>
             </motion.span>
           </motion.h1>
 
           <motion.div 
             variants={itemVariants}
-            className="text-2xl lg:text-3xl text-gray-600 mb-8 h-20 flex items-center justify-center lg:justify-start"
+            className="text-2xl lg:text-3xl text-white/80 mb-8 h-20 flex items-center justify-center lg:justify-start"
           >
             <TypeAnimation
               sequence={[
@@ -166,9 +135,9 @@ const Hero = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-lg text-gray-600 mb-10 max-w-2xl leading-relaxed"
+            className="text-lg text-white/70 mb-10 max-w-2xl leading-relaxed"
           >
-            Passionate software engineer crafting exceptional digital experiences with modern technologies. 
+            Passionate software engineer crafting exceptional digital experiences across the cosmic web. 
             Specialized in full-stack development with a focus on scalable backend solutions.
           </motion.p>
 
@@ -182,7 +151,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-3 shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
+              className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold flex items-center gap-3 shadow-2xl hover:shadow-purple-500/25 transition-all relative overflow-hidden backdrop-blur-xl"
             >
               <motion.div
                 className="absolute inset-0 bg-white/20"
@@ -198,7 +167,7 @@ const Hero = () => {
               onClick={scrollToNext}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-full font-semibold hover:border-blue-500 hover:text-blue-600 transition-all flex items-center gap-3"
+              className="px-8 py-4 border-2 border-white/20 text-white/80 rounded-full font-semibold hover:border-purple-400 hover:text-purple-300 transition-all flex items-center gap-3 backdrop-blur-xl"
             >
               <span>Explore Work</span>
               <ArrowDown className="w-5 h-5" />
@@ -224,11 +193,11 @@ const Hero = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            {/* Animated rings */}
+            {/* Animated cosmic rings */}
             {[...Array(3)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute inset-0 rounded-full border-2 border-blue-200/30"
+                className="absolute inset-0 rounded-full border-2 border-purple-400/30"
                 animate={{
                   rotate: [0, 360],
                   scale: [1, 1.1, 1],
@@ -248,7 +217,7 @@ const Hero = () => {
             ))}
 
             <motion.div
-              className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white shadow-2xl relative z-10"
+              className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl relative z-10 backdrop-blur-xl"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 1, type: "spring", stiffness: 100 }}
@@ -259,7 +228,7 @@ const Hero = () => {
                 className="w-full h-full object-cover"
               />
               <motion.div
-                className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20"
+                className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-pink-500/20"
                 animate={{
                   opacity: [0.2, 0.4, 0.2],
                 }}
@@ -271,9 +240,9 @@ const Hero = () => {
               />
             </motion.div>
 
-            {/* Floating tech icons */}
+            {/* Floating tech icons with cosmic theme */}
             <motion.div
-              className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg"
+              className="absolute -top-4 -right-4 w-16 h-16 bg-purple-500/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white font-bold shadow-2xl border border-purple-500/30"
               animate={{
                 y: [-5, 5, -5],
                 rotate: [0, 10, -10, 0],
@@ -287,7 +256,7 @@ const Hero = () => {
               ⚛️
             </motion.div>
             <motion.div
-              className="absolute -bottom-4 -left-4 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg"
+              className="absolute -bottom-4 -left-4 w-16 h-16 bg-green-500/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white font-bold shadow-2xl border border-green-500/30"
               animate={{
                 y: [5, -5, 5],
                 rotate: [0, -10, 10, 0],
@@ -302,7 +271,7 @@ const Hero = () => {
               ☕
             </motion.div>
             <motion.div
-              className="absolute top-1/2 -right-8 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg"
+              className="absolute top-1/2 -right-8 w-12 h-12 bg-pink-500/20 backdrop-blur-xl rounded-full flex items-center justify-center text-white font-bold shadow-2xl border border-pink-500/30"
               animate={{
                 x: [-3, 3, -3],
                 scale: [1, 1.1, 1],
@@ -334,9 +303,9 @@ const Hero = () => {
       >
         <button
           onClick={scrollToNext}
-          className="p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-lg hover:bg-white transition-colors"
+          className="p-3 rounded-full bg-white/10 backdrop-blur-xl shadow-2xl hover:bg-white/20 transition-colors border border-white/20"
         >
-          <ArrowDown className="w-6 h-6 text-gray-600" />
+          <ArrowDown className="w-6 h-6 text-white/80" />
         </button>
       </motion.div>
     </motion.section>

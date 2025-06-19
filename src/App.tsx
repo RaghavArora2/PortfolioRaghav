@@ -10,15 +10,14 @@ import GitHubStats from './components/GitHubStats';
 import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 import LoadingScreen from './components/LoadingScreen';
-import SectionDivider from './components/SectionDivider';
-import TechyBackground from './components/TechyBackground';
+import SpaceBackground from './components/SpaceBackground';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Faster loading with minimal delay
-    const timer = setTimeout(() => setIsLoading(false), 1500);
+    const timer = setTimeout(() => setIsLoading(false), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,22 +27,16 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative transition-colors duration-300">
-        <TechyBackground />
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-black dark:from-black dark:via-purple-950 dark:to-black relative transition-colors duration-300">
+        <SpaceBackground />
         <Navbar />
         <main className="relative">
           <Hero />
-          <SectionDivider color="#ffffff" bgColor="bg-white dark:bg-gray-800" />
           <About />
-          <SectionDivider color="#f9fafb" bgColor="bg-gray-50 dark:bg-gray-900" />
           <Skills />
-          <SectionDivider color="#ffffff" bgColor="bg-white dark:bg-gray-800" />
           <Experience />
-          <SectionDivider color="#f9fafb" bgColor="bg-gray-50 dark:bg-gray-900" />
           <Projects />
-          <SectionDivider color="#ffffff" bgColor="bg-white dark:bg-gray-800" />
           <GitHubStats />
-          <SectionDivider color="#f9fafb" bgColor="bg-gray-50 dark:bg-gray-900" />
           <Contact />
         </main>
         <WhatsAppButton />

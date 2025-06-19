@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { BriefcaseIcon, Code } from 'lucide-react';
+import { BriefcaseIcon, Code, Star } from 'lucide-react';
 
 const ExperienceCard = ({ title, company, date, description, icon: Icon }: {
   title: string;
@@ -12,26 +12,24 @@ const ExperienceCard = ({ title, company, date, description, icon: Icon }: {
 }) => (
   <motion.div
     whileHover={{ y: -5 }}
-    className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all relative overflow-hidden group"
+    className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-purple-500/20 transition-all relative overflow-hidden group border border-white/10"
   >
     <motion.div
-      className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity"
+      className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity"
       initial={false}
-      animate={{ opacity: [0, 0.1, 0] }}
-      transition={{ duration: 2, repeat: Infinity }}
     />
-    <div className="flex items-start gap-4">
-      <div className="p-3 bg-blue-100 rounded-lg">
-        <Icon className="w-6 h-6 text-blue-600" />
+    <div className="flex items-start gap-4 relative z-10">
+      <div className="p-3 bg-purple-500/20 rounded-lg border border-purple-500/30">
+        <Icon className="w-6 h-6 text-purple-400" />
       </div>
       <div className="flex-1">
-        <h3 className="text-xl font-bold text-gray-800">{title}</h3>
-        <p className="text-blue-600 font-medium">{company}</p>
-        <p className="text-gray-500 text-sm mb-4">{date}</p>
+        <h3 className="text-xl font-bold text-white/90">{title}</h3>
+        <p className="text-purple-400 font-medium">{company}</p>
+        <p className="text-white/60 text-sm mb-4">{date}</p>
         <ul className="space-y-2">
           {description.map((item, index) => (
-            <li key={index} className="text-gray-600 text-sm flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 flex-shrink-0" />
+            <li key={index} className="text-white/70 text-sm flex items-start gap-2">
+              <Star className="w-3 h-3 text-purple-400 mt-1 flex-shrink-0" />
               {item}
             </li>
           ))}
@@ -76,15 +74,20 @@ const Experience = () => {
   ];
 
   return (
-    <section className="py-20 bg-white px-4" id="experience">
+    <section className="py-20 bg-transparent px-4" id="experience">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">Experience</h2>
-          <div className="h-1 w-20 bg-blue-600 rounded mb-12" />
+          <h2 className="text-4xl font-bold text-white/90 mb-4">Experience</h2>
+          <motion.div 
+            className="h-1 w-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mb-12"
+            initial={{ width: 0 }}
+            animate={inView ? { width: 80 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+          />
         </motion.div>
         
         <motion.div
