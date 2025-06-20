@@ -11,14 +11,13 @@ const ExperienceCard = ({ title, company, date, description, icon: Icon }: {
   icon: any;
 }) => (
   <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
     whileHover={{ y: -5 }}
-    className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-purple-500/20 transition-all relative overflow-hidden group border border-white/10"
+    className="bg-white/5 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10"
   >
-    <motion.div
-      className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity"
-      initial={false}
-    />
-    <div className="flex items-start gap-4 relative z-10">
+    <div className="flex items-start gap-4">
       <div className="p-3 bg-purple-500/20 rounded-lg border border-purple-500/30">
         <Icon className="w-6 h-6 text-purple-400" />
       </div>
@@ -74,33 +73,26 @@ const Experience = () => {
   ];
 
   return (
-    <section className="py-20 bg-transparent px-4" id="experience">
+    <section className="py-16 bg-transparent px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-white/90 mb-4">Experience</h2>
-          <motion.div 
-            className="h-1 w-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mb-12"
-            initial={{ width: 0 }}
-            animate={inView ? { width: 80 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
-          />
+          <div className="h-1 w-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-4" />
         </motion.div>
         
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
           className="space-y-8"
         >
           {experiences.map((experience, index) => (
             <ExperienceCard key={index} {...experience} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

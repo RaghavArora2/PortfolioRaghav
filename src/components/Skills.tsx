@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Users, MessageSquare, BriefcaseIcon, Clock, Handshake, Brain, Target, Zap, Star } from 'lucide-react';
+import { Users, MessageSquare, BriefcaseIcon, Clock, Handshake, Brain, Target, Zap } from 'lucide-react';
 import { FaJava, FaReact, FaNodeJs, FaDocker, FaAws, FaWordpress, FaHtml5, FaCss3 } from 'react-icons/fa';
 import { SiSpringboot, SiMongodb, SiPostman, SiWix, SiKalilinux, SiJavascript, SiMysql, SiExpress } from 'react-icons/si';
 
@@ -13,94 +13,27 @@ interface SkillProps {
 }
 
 const SkillIcon = ({ icon: Icon, label, color }: SkillProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const iconVariants = {
-    initial: { scale: 1, rotateY: 0 },
-    hover: { 
-      scale: 1.15,
-      rotateY: 360,
-      transition: {
-        duration: 0.8,
-        type: "spring",
-        stiffness: 200
-      }
-    }
-  };
-
   return (
     <motion.div
-      variants={iconVariants}
-      initial="initial"
-      whileHover="hover"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="relative group"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -5, scale: 1.05 }}
+      className="group"
     >
-      <motion.div
-        className="flex flex-col items-center p-6 bg-white/5 dark:bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl hover:shadow-purple-500/20 transition-all relative overflow-hidden border border-white/10 dark:border-white/10"
-        whileHover={{ y: -8 }}
-      >
-        {/* Cosmic background */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          initial={false}
-        />
-        
-        {/* Skill icon */}
-        <div className={`w-16 h-16 flex items-center justify-center rounded-full ${color} relative z-10 mb-4 shadow-lg`}>
+      <div className="flex flex-col items-center p-4 bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10">
+        <div className={`w-12 h-12 flex items-center justify-center rounded-full ${color} mb-3 group-hover:scale-110 transition-transform`}>
           {typeof Icon === 'string' ? (
-            <span className="text-lg font-bold">{Icon}</span>
+            <span className="text-sm font-bold">{Icon}</span>
           ) : (
-            <Icon className="w-8 h-8" />
+            <Icon className="w-6 h-6" />
           )}
-          
-          {/* Stellar glow effect */}
-          <motion.div
-            className="absolute inset-0 rounded-full bg-current opacity-20 blur-xl"
-            animate={isHovered ? { 
-              scale: [1, 1.5, 1],
-              opacity: [0.2, 0.6, 0.2]
-            } : {}}
-            transition={{ duration: 1.5, repeat: isHovered ? Infinity : 0 }}
-          />
         </div>
         
-        <span className="text-sm font-semibold text-white/90 dark:text-white/90 text-center relative z-10">
+        <span className="text-sm font-semibold text-white/90 dark:text-white/90 text-center">
           {label}
         </span>
-        
-        {/* Floating stars */}
-        {isHovered && (
-          <>
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                initial={{ 
-                  x: Math.random() * 100 - 50,
-                  y: Math.random() * 100 - 50,
-                  opacity: 0,
-                  scale: 0
-                }}
-                animate={{
-                  y: -150,
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{
-                  duration: 2,
-                  delay: i * 0.1,
-                  repeat: Infinity,
-                }}
-              >
-                <Star className="w-3 h-3 text-yellow-300" />
-              </motion.div>
-            ))}
-          </>
-        )}
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
@@ -111,16 +44,6 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.03
-      }
-    }
-  };
-
   const filteredSkills = filter === 'all' 
     ? skills 
     : skills.filter(skill => skill.category.toLowerCase() === filter.toLowerCase());
@@ -130,50 +53,24 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
   return (
     <motion.div
       ref={ref}
-      variants={containerVariants}
-      initial="hidden"
-      animate={inView ? "show" : "hidden"}
-      className="mb-20"
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      className="mb-16"
     >
       <motion.h3 
-        className="text-3xl font-bold text-white/90 dark:text-white/90 mb-12 text-center relative"
+        className="text-2xl font-bold text-white/90 dark:text-white/90 mb-8 text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
       >
         {title}
-        <motion.div
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-full"
-          initial={{ width: 0 }}
-          animate={inView ? { width: 80 } : {}}
-          transition={{ delay: 0.5, duration: 1 }}
-        />
+        <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mt-2" />
       </motion.h3>
       
-      <motion.div 
-        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
-        variants={containerVariants}
-      >
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {filteredSkills.map((skill, index) => (
-          <motion.div
-            key={skill.label}
-            variants={{
-              hidden: { opacity: 0, y: 30, scale: 0.8 },
-              show: { 
-                opacity: 1, 
-                y: 0, 
-                scale: 1,
-                transition: {
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 10
-                }
-              }
-            }}
-          >
-            <SkillIcon {...skill} />
-          </motion.div>
+          <SkillIcon key={skill.label} {...skill} />
         ))}
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
@@ -213,61 +110,43 @@ const Skills = () => {
 
   const filters = ['all', 'frontend', 'backend', 'tools', 'soft'];
 
-  const buttonVariants = {
-    initial: { scale: 1 },
-    hover: { scale: 1.05 },
-    tap: { scale: 0.95 }
-  };
-
   return (
-    <section className="py-20 bg-transparent px-4 relative overflow-hidden" id="skills">
-      <div className="max-w-7xl mx-auto relative">
+    <section className="py-16 bg-transparent px-4" id="skills">
+      <div className="max-w-6xl mx-auto">
         <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
-          <motion.h2 
-            className="text-4xl lg:text-5xl font-bold text-white/90 dark:text-white/90 mb-4 relative inline-block"
-            whileHover={{ scale: 1.05 }}
-          >
+          <h2 className="text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
             <Zap className="inline-block mr-3 text-purple-400" />
             Skills & Expertise
-            <motion.div
-              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 rounded-full"
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 1.5, delay: 0.3 }}
-            />
-          </motion.h2>
-          <p className="text-white/70 dark:text-white/70 text-lg max-w-2xl mx-auto">
+          </h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-4" />
+          <p className="text-white/70 dark:text-white/70 text-lg">
             Mastering cutting-edge technologies across the digital cosmos
           </p>
         </motion.div>
         
         <motion.div 
-          className="flex justify-center gap-4 mb-16 flex-wrap"
+          className="flex justify-center gap-3 mb-12 flex-wrap"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
         >
           {filters.map((f) => (
-            <motion.button
+            <button
               key={f}
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
               onClick={() => setFilter(f)}
-              className={`px-6 py-3 rounded-full capitalize font-semibold transition-all backdrop-blur-xl border ${
+              className={`px-4 py-2 rounded-full capitalize font-medium transition-all backdrop-blur-sm border ${
                 filter === f
-                  ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white border-purple-400/50 shadow-lg shadow-purple-500/25'
-                  : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border-white/10 hover:border-white/20'
+                  ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white border-purple-400/50'
+                  : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border-white/10'
               }`}
             >
               {f}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 

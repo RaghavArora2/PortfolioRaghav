@@ -9,7 +9,7 @@ const ThemeToggle = () => {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="relative p-3 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-xl border border-white/20 dark:border-white/20 shadow-2xl hover:shadow-purple-500/25 transition-all"
+      className="relative p-3 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg hover:shadow-purple-500/25 transition-all"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, scale: 0 }}
@@ -17,21 +17,21 @@ const ThemeToggle = () => {
       transition={{ delay: 0.5 }}
     >
       <motion.div
-        className="relative w-6 h-6"
+        className="relative w-5 h-5"
         animate={{ rotate: isDark ? 180 : 0 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{ opacity: isDark ? 0 : 1, scale: isDark ? 0.5 : 1 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
         >
           <Sun className="w-5 h-5 text-yellow-400" />
         </motion.div>
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{ opacity: isDark ? 1 : 0, scale: isDark ? 1 : 0.5 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
         >
           <Moon className="w-5 h-5 text-purple-400" />
         </motion.div>

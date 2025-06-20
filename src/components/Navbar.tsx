@@ -14,7 +14,7 @@ const Navbar = () => {
       setScrolled(scrollPosition > 50);
       
       const sections = document.querySelectorAll('section[id]');
-      const scrollPos = scrollPosition + window.innerHeight / 2;
+      const scrollPos = scrollPosition + 100; // Adjusted offset
       
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -49,9 +49,9 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 py-4 px-6 transition-all duration-300 ${
+      className={`fixed w-full z-50 py-3 px-4 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/10 dark:bg-black/20 backdrop-blur-xl border-b border-white/10 dark:border-white/5 shadow-lg' 
+          ? 'bg-black/80 dark:bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
           : 'bg-transparent'
       }`}
     >
@@ -72,35 +72,29 @@ const Navbar = () => {
           
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white/80 hover:text-white transition-colors"
+            className="md:hidden text-white/80 hover:text-white transition-colors p-2"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
           </button>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-8">
+          <ul className="hidden md:flex space-x-6">
             {['about', 'skills', 'experience', 'projects', 'contact'].map((item) => (
               <motion.li
                 key={item}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 className="cursor-pointer"
               >
                 <button
                   onClick={() => scrollTo(item)}
-                  className={`capitalize transition-all duration-300 relative ${
+                  className={`capitalize transition-all duration-300 relative px-3 py-2 rounded-lg ${
                     activeSection === item
-                      ? 'text-purple-400 font-medium'
-                      : 'text-white/70 hover:text-purple-300'
+                      ? 'text-purple-400 font-medium bg-purple-500/10'
+                      : 'text-white/70 hover:text-purple-300 hover:bg-white/5'
                   }`}
                 >
                   {item}
-                  {activeSection === item && (
-                    <motion.div
-                      layoutId="activeSection"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
-                    />
-                  )}
                 </button>
               </motion.li>
             ))}
@@ -113,18 +107,18 @@ const Navbar = () => {
           animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
           className={`${
             isOpen ? 'block' : 'hidden'
-          } absolute top-full left-0 right-0 bg-black/90 backdrop-blur-xl shadow-2xl md:hidden border-t border-white/10`}
+          } absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl shadow-2xl md:hidden border-t border-white/10`}
         >
           <ul className="px-4 py-2">
             {['about', 'skills', 'experience', 'projects', 'contact'].map((item) => (
               <li key={item}>
                 <button
                   onClick={() => scrollTo(item)}
-                  className={`block w-full text-left py-4 px-4 capitalize transition-all duration-300 ${
+                  className={`block w-full text-left py-3 px-4 capitalize transition-all duration-300 rounded-lg ${
                     activeSection === item
                       ? 'text-purple-400 font-medium bg-purple-500/10'
                       : 'text-white/70 hover:text-purple-300 hover:bg-white/5'
-                  } rounded-lg`}
+                  }`}
                 >
                   {item}
                 </button>

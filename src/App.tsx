@@ -16,8 +16,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Faster loading with minimal delay
-    const timer = setTimeout(() => setIsLoading(false), 1200);
+    // Faster loading
+    const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,13 +31,27 @@ function App() {
         <SpaceBackground />
         <Navbar />
         <main className="relative">
-          <Hero />
-          <About />
-          <Skills />
-          <Experience />
-          <Projects />
-          <GitHubStats />
-          <Contact />
+          <section id="hero">
+            <Hero />
+          </section>
+          <section id="about">
+            <About />
+          </section>
+          <section id="skills">
+            <Skills />
+          </section>
+          <section id="experience">
+            <Experience />
+          </section>
+          <section id="projects">
+            <Projects />
+          </section>
+          <section id="github-stats">
+            <GitHubStats />
+          </section>
+          <section id="contact">
+            <Contact />
+          </section>
         </main>
         <WhatsAppButton />
       </div>
