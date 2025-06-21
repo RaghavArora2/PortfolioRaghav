@@ -21,16 +21,16 @@ const SkillIcon = ({ icon: Icon, label, color }: SkillProps) => {
       whileHover={{ y: -5, scale: 1.05 }}
       className="group"
     >
-      <div className="flex flex-col items-center p-4 bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10">
-        <div className={`w-12 h-12 flex items-center justify-center rounded-full ${color} mb-3 group-hover:scale-110 transition-transform`}>
+      <div className="flex flex-col items-center p-3 sm:p-4 bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10">
+        <div className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full ${color} mb-2 sm:mb-3 group-hover:scale-110 transition-transform`}>
           {typeof Icon === 'string' ? (
-            <span className="text-sm font-bold">{Icon}</span>
+            <span className="text-xs sm:text-sm font-bold">{Icon}</span>
           ) : (
-            <Icon className="w-6 h-6" />
+            <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
           )}
         </div>
         
-        <span className="text-sm font-semibold text-white/90 dark:text-white/90 text-center">
+        <span className="text-xs sm:text-sm font-semibold text-white/90 dark:text-white/90 text-center leading-tight">
           {label}
         </span>
       </div>
@@ -55,10 +55,10 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
       ref={ref}
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
-      className="mb-16"
+      className="mb-12 sm:mb-16"
     >
       <motion.h3 
-        className="text-2xl font-bold text-white/90 dark:text-white/90 mb-8 text-center"
+        className="text-xl sm:text-2xl font-bold text-white/90 dark:text-white/90 mb-6 sm:mb-8 text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
       >
@@ -66,7 +66,7 @@ const SkillSection = ({ title, skills, filter }: { title: string; skills: SkillP
         <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mt-2" />
       </motion.h3>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
         {filteredSkills.map((skill, index) => (
           <SkillIcon key={skill.label} {...skill} />
         ))}
@@ -111,26 +111,26 @@ const Skills = () => {
   const filters = ['all', 'frontend', 'backend', 'tools', 'soft'];
 
   return (
-    <section className="py-16 bg-transparent px-4" id="skills">
+    <section className="py-12 sm:py-16 bg-transparent px-4" id="skills">
       <div className="max-w-6xl mx-auto">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
             <Zap className="inline-block mr-3 text-purple-400" />
             Skills & Expertise
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-4" />
-          <p className="text-white/70 dark:text-white/70 text-lg">
+          <p className="text-white/70 dark:text-white/70 text-sm sm:text-base lg:text-lg px-4">
             Mastering cutting-edge technologies across the digital cosmos
           </p>
         </motion.div>
         
         <motion.div 
-          className="flex justify-center gap-3 mb-12 flex-wrap"
+          className="flex justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 flex-wrap px-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -139,7 +139,7 @@ const Skills = () => {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 rounded-full capitalize font-medium transition-all backdrop-blur-sm border ${
+              className={`px-3 sm:px-4 py-2 rounded-full capitalize font-medium transition-all backdrop-blur-sm border text-xs sm:text-sm ${
                 filter === f
                   ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white border-purple-400/50'
                   : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border-white/10'

@@ -38,7 +38,7 @@ const ProjectCard = ({
         className="group cursor-pointer"
         onClick={() => setIsExpanded(true)}
       >
-        <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all overflow-hidden border border-white/10">
+        <div className="bg-white/5 dark:bg-white/5 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all overflow-hidden border border-white/10 relative">
           {details.featured && (
             <div className="absolute top-3 right-3 z-10">
               <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
@@ -48,7 +48,7 @@ const ProjectCard = ({
             </div>
           )}
 
-          <div className="relative h-40 overflow-hidden">
+          <div className="relative h-32 sm:h-40 overflow-hidden">
             <img 
               src={details.image} 
               alt={title}
@@ -58,11 +58,11 @@ const ProjectCard = ({
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             
             <div className="absolute top-3 left-3 p-2 bg-white/10 backdrop-blur-sm rounded-lg">
-              <Icon className="w-4 h-4 text-purple-400" />
+              <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
             </div>
 
             <div className="absolute bottom-3 left-3 right-3">
-              <h3 className="text-lg font-bold text-white mb-1">{title}</h3>
+              <h3 className="text-sm sm:text-lg font-bold text-white mb-1">{title}</h3>
               <div className="flex flex-wrap gap-1">
                 {tech.split(',').slice(0, 3).map((t, i) => (
                   <span
@@ -76,10 +76,10 @@ const ProjectCard = ({
             </div>
           </div>
 
-          <div className="p-4">
-            <ul className="space-y-1 mb-4">
+          <div className="p-3 sm:p-4">
+            <ul className="space-y-1 mb-3 sm:mb-4">
               {description.slice(0, 2).map((item, index) => (
-                <li key={index} className="text-white/70 dark:text-white/70 text-sm flex items-start gap-2">
+                <li key={index} className="text-white/70 dark:text-white/70 text-xs sm:text-sm flex items-start gap-2">
                   <span className="w-1 h-1 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                   {item}
                 </li>
@@ -87,13 +87,13 @@ const ProjectCard = ({
             </ul>
 
             <div className="flex items-center justify-between">
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 {details.demoUrl && (
                   <a
                     href={details.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-purple-400 hover:text-purple-300 text-sm"
+                    className="flex items-center gap-1 text-purple-400 hover:text-purple-300 text-xs sm:text-sm"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalLink size={12} />
@@ -104,7 +104,7 @@ const ProjectCard = ({
                   href={details.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-white/60 hover:text-white/80 text-sm"
+                  className="flex items-center gap-1 text-white/60 hover:text-white/80 text-xs sm:text-sm"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Github size={12} />
@@ -112,7 +112,7 @@ const ProjectCard = ({
                 </a>
               </div>
               
-              <div className="flex items-center gap-1 text-purple-400 text-sm">
+              <div className="flex items-center gap-1 text-purple-400 text-xs sm:text-sm">
                 Details
                 <ArrowRight size={12} />
               </div>
@@ -134,7 +134,7 @@ const ProjectCard = ({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-gradient-to-br from-gray-900/95 to-purple-900/95 backdrop-blur-xl rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-500/20"
+              className="bg-gradient-to-br from-gray-900/98 to-purple-900/98 backdrop-blur-xl rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-purple-500/30"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -144,15 +144,15 @@ const ProjectCard = ({
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              <div className="relative h-48 overflow-hidden rounded-t-2xl">
+              <div className="relative h-40 sm:h-48 overflow-hidden rounded-t-2xl">
                 <img 
                   src={details.image} 
                   alt={title}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-4 left-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
+                <div className="absolute bottom-4 left-4 sm:left-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{title}</h3>
                   {details.featured && (
                     <div className="inline-flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-3 py-1 rounded-full text-sm font-bold">
                       <Star className="w-3 h-3" />
@@ -162,7 +162,7 @@ const ProjectCard = ({
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {details.tech.map((t, i) => (
                     <span
@@ -176,17 +176,17 @@ const ProjectCard = ({
 
                 <div className="space-y-3 mb-6">
                   {details.description.map((desc, i) => (
-                    <p key={i} className="text-white/80 leading-relaxed">{desc}</p>
+                    <p key={i} className="text-white/80 leading-relaxed text-sm sm:text-base">{desc}</p>
                   ))}
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   {details.demoUrl && (
                     <a
                       href={details.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg transition-all"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-medium hover:shadow-lg transition-all text-sm sm:text-base"
                     >
                       <ExternalLink size={16} />
                       Live Demo
@@ -196,7 +196,7 @@ const ProjectCard = ({
                     href={details.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-white/10 text-white rounded-lg font-medium hover:bg-white/20 transition-colors border border-white/20"
+                    className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 text-white rounded-lg font-medium hover:bg-white/20 transition-colors border border-white/20 text-sm sm:text-base"
                   >
                     <Github size={16} />
                     Source Code
@@ -335,27 +335,27 @@ const Projects = () => {
   ];
 
   return (
-    <section className="py-16 bg-transparent px-4" id="projects">
+    <section className="py-12 sm:py-16 bg-transparent px-4" id="projects">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
             <Code className="inline-block mr-3 text-purple-400" />
             Featured Projects
           </h2>
           <div className="h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-4" />
-          <p className="text-white/70 dark:text-white/70 text-lg">
+          <p className="text-white/70 dark:text-white/70 text-sm sm:text-base lg:text-lg px-4">
             Showcasing innovative solutions across the digital universe
           </p>
         </motion.div>
         
         <div
           ref={ref}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />

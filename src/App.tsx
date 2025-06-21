@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import GitHubStats from './components/GitHubStats';
 import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
+import Chatbot from './components/Chatbot';
 import LoadingScreen from './components/LoadingScreen';
 import SpaceBackground from './components/SpaceBackground';
 
@@ -54,6 +55,7 @@ function App() {
           </section>
         </main>
         <WhatsAppButton />
+        <Chatbot />
       </div>
     </ThemeProvider>
   );

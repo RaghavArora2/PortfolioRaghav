@@ -21,25 +21,25 @@ const GitHubStats = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
-      className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10"
+      className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10"
     >
-      <div className="flex items-center gap-4 mb-4">
-        <div className="p-3 bg-purple-500/20 rounded-xl border border-purple-500/30">
-          <Icon className="w-6 h-6 text-purple-400" />
+      <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+        <div className="p-2 sm:p-3 bg-purple-500/20 rounded-xl border border-purple-500/30">
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
         </div>
         <div>
-          <h4 className="font-bold text-white/90 dark:text-white/90">{title}</h4>
-          <p className="text-2xl font-bold text-purple-400">{value}</p>
+          <h4 className="font-bold text-white/90 dark:text-white/90 text-sm sm:text-base">{title}</h4>
+          <p className="text-xl sm:text-2xl font-bold text-purple-400">{value}</p>
         </div>
       </div>
-      <p className="text-white/70 dark:text-white/70 text-sm">{description}</p>
+      <p className="text-white/70 dark:text-white/70 text-xs sm:text-sm">{description}</p>
     </motion.div>
   );
 
   return (
     <section
       ref={ref}
-      className="py-16 bg-transparent px-4"
+      className="py-12 sm:py-16 bg-transparent px-4"
       id="github-stats"
     >
       <div className="max-w-6xl mx-auto">
@@ -47,18 +47,18 @@ const GitHubStats = () => {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white/90 dark:text-white/90 mb-4">
             <Github className="inline-block mr-3 text-purple-400" />
             GitHub Activity
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mb-4" />
-          <p className="text-white/70 dark:text-white/70 text-lg">My coding journey across the digital cosmos</p>
+          <p className="text-white/70 dark:text-white/70 text-sm sm:text-base lg:text-lg px-4">My coding journey across the digital cosmos</p>
         </motion.div>
 
         {/* GitHub Stats Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <StatCard
             icon={Code2}
             title="Public Repos"
@@ -84,9 +84,9 @@ const GitHubStats = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/10"
+          className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-lg border border-white/10 mb-8 sm:mb-12"
         >
-          <h3 className="text-2xl font-bold text-white/90 dark:text-white/90 mb-6 text-center">
+          <h3 className="text-xl sm:text-2xl font-bold text-white/90 dark:text-white/90 mb-4 sm:mb-6 text-center">
             Contribution Activity
           </h3>
           <div className="flex justify-center overflow-x-auto">
@@ -104,12 +104,12 @@ const GitHubStats = () => {
         </motion.div>
 
         {/* GitHub Profile Stats Images */}
-        <div className="grid md:grid-cols-2 gap-6 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/10"
+            className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-white/10"
           >
             <img
               src="https://github-readme-stats.vercel.app/api?username=RaghavArora2&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&icon_color=a855f7&text_color=ffffff"
@@ -122,7 +122,7 @@ const GitHubStats = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/10"
+            className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-white/10"
           >
             <img
               src="https://github-readme-stats.vercel.app/api/top-langs/?username=RaghavArora2&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&text_color=ffffff"
