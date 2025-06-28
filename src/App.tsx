@@ -17,8 +17,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Faster loading
-    const timer = setTimeout(() => setIsLoading(false), 800);
+    // Much faster loading
+    const timer = setTimeout(() => setIsLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-black dark:from-black dark:via-purple-950 dark:to-black relative transition-colors duration-300">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-black relative transition-colors duration-300">
         <SpaceBackground />
         <Navbar />
         <main className="relative">
