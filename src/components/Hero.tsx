@@ -148,7 +148,7 @@ const Hero = () => {
 
             <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl mx-auto z-10" style={{ margin: '4px' }}>
               <img
-                src="https://media.licdn.com/dms/image/v2/D5603AQFD5fs7yldDgw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1728588715860?e=1755734400&v=beta&t=jQ-A-nfjVW6KiVNqcW1zu5IyhGTMcRTOAZBwm5A5wDM"
+                src="https://media.licdn.com/dms/image/v2/D5603AQFoHJPecDoPLA/profile-displayphoto-scale_400_400/B56Zpyb8pAH8Ag-/0/1762856527099?e=1769040000&v=beta&t=DqY-HeYj-bwhaPCVbK4bMg09w9-oYHsCMbubrJqw9g0"
                 alt="Raghav Arora"
                 className="w-full h-full object-cover"
                 loading="eager"
