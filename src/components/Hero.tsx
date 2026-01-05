@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Download, ArrowDown, Sparkles, Star, Rocket, Zap } from 'lucide-react';
 import CountUp from 'react-countup';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Hero = () => {
+  const { isDark } = useTheme();
   const StatItem = ({ value, label, icon: Icon }: { value: number; label: string; icon: any }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -68,13 +70,13 @@ const Hero = () => {
           >
             <TypeAnimation
               sequence={[
-                'Full Stack Developer 🚀',
+                'Technical Team Lead 🚀',
                 2000,
-                'Spring Boot Expert ☕',
+                'Web & App Development 💻',
                 2000,
-                'React Specialist ⚛️',
+                'AWS | Docker | System Architecture ☁️',
                 2000,
-                'Problem Solver 🧩',
+                'Project Management 📊',
                 2000,
               ]}
               wrapper="span"
@@ -90,8 +92,9 @@ const Hero = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-lg text-white/70 mb-8 max-w-2xl leading-relaxed"
           >
-            Passionate software engineer crafting exceptional digital experiences across the cosmic web. 
-            Specialized in full-stack development with a focus on scalable backend solutions.
+            Technical Team Lead @ WellnessZ | Web & App Development | AWS | Docker | System Architecture
+            <br />
+            <span className="text-base">Amritsar, Punjab, India</span>
           </motion.p>
 
           <motion.div 
@@ -124,9 +127,9 @@ const Hero = () => {
           </motion.div>
 
           <div className="grid grid-cols-3 gap-4">
-            <StatItem value={50} label="Projects" icon={Rocket} />
-            <StatItem value={100} label="Clients" icon={Zap} />
-            <StatItem value={3} label="Years Exp" icon={Star} />
+            <StatItem value={100} label="Clients" icon={Rocket} />
+            <StatItem value={3} label="Years Exp" icon={Zap} />
+            <StatItem value={1} label="Year Lead" icon={Star} />
           </div>
         </motion.div>
 
@@ -134,24 +137,33 @@ const Hero = () => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="relative lg:flex-1 max-w-sm lg:max-w-md order-1 lg:order-2"
+          className="relative lg:flex-1 max-w-sm lg:max-w-md order-1 lg:order-2 z-20"
         >
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             {/* Simplified animated ring */}
             <motion.div
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 p-1"
+              className="absolute rounded-full bg-gradient-to-r from-purple-600 to-pink-600 p-1 w-64 h-64 lg:w-80 lg:h-80"
               animate={{ rotate: 360 }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              style={{ filter: 'blur(0px)' }}
             >
-              <div className="w-full h-full rounded-full bg-black/50" />
+              <div className={`w-full h-full rounded-full ${
+                isDark 
+                  ? 'bg-gradient-to-b from-gray-900 via-purple-900 to-black' 
+                  : 'bg-gradient-to-b from-gray-100 via-purple-50 to-white'
+              }`} />
             </motion.div>
 
-            <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl mx-auto z-10" style={{ margin: '4px' }}>
+            <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl z-10 border-4 border-transparent" style={{ margin: '4px' }}>
               <img
                 src="https://media.licdn.com/dms/image/v2/D5603AQFoHJPecDoPLA/profile-displayphoto-scale_400_400/B56Zpyb8pAH8Ag-/0/1762856527099?e=1769040000&v=beta&t=DqY-HeYj-bwhaPCVbK4bMg09w9-oYHsCMbubrJqw9g0"
                 alt="Raghav Arora"
                 className="w-full h-full object-cover"
                 loading="eager"
+                style={{ 
+                  filter: 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.4))',
+                  objectPosition: 'center'
+                }}
               />
             </div>
 

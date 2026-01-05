@@ -1,36 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { ThemeProvider } from './contexts/ThemeContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import { useEffect, useState } from 'react';
 import About from './components/About';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import GitHubStats from './components/GitHubStats';
-import Contact from './components/Contact';
-import WhatsAppButton from './components/WhatsAppButton';
 import Chatbot from './components/Chatbot';
+import Contact from './components/Contact';
+import Experience from './components/Experience';
+import GitHubStats from './components/GitHubStats';
+import Hero from './components/Hero';
 import LoadingScreen from './components/LoadingScreen';
+import Navbar from './components/Navbar';
+import Projects from './components/Projects';
+import Skills from './components/Skills';
 import SpaceBackground from './components/SpaceBackground';
+import WhatsAppButton from './components/WhatsAppButton';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Much faster loading
-    const timer = setTimeout(() => setIsLoading(false), 600);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
-  }
+function AppContent() {
+  const { isDark } = useTheme();
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-black relative transition-colors duration-300">
-        <SpaceBackground />
-        <Navbar />
+    <div className={`min-h-screen relative transition-colors duration-300 ${
+      isDark 
+        ? 'bg-gradient-to-b from-gray-900 via-purple-900 to-black' 
+        : 'bg-gradient-to-b from-gray-100 via-purple-50 to-white'
+    }`}>
+      <SpaceBackground />
+      <Navbar />
         <main className="relative">
           <section id="hero">
             <Hero />
@@ -54,9 +47,28 @@ function App() {
             <Contact />
           </section>
         </main>
-        <WhatsAppButton />
-        <Chatbot />
-      </div>
+      <WhatsAppButton />
+      <Chatbot />
+    </div>
+  );
+}
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Much faster loading
+    const timer = setTimeout(() => setIsLoading(false), 600);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  }
+
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }

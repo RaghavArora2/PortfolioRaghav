@@ -69,16 +69,16 @@ const Contact = () => {
           
           <ContactItem
             icon={Phone}
-            label="Phone"
-            value="+91 9815919243"
+            label="Mobile"
+            value="9815919243"
             link="tel:+919815919243"
           />
           
           <ContactItem
             icon={Linkedin}
             label="LinkedIn"
-            value="Raghav Arora"
-            link="https://linkedin.com/in/raghav-arora2003"
+            value="raghavarora2003"
+            link="https://www.linkedin.com/in/raghavarora2003"
           />
           
           <ContactItem

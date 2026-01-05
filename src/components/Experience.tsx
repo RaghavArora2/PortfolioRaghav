@@ -47,27 +47,38 @@ const Experience = () => {
   const experiences = [
     {
       icon: BriefcaseIcon,
-      title: "Sales Engineer Intern",
+      title: "Operations Engineer",
       company: "WellnessZ",
-      date: "Jan 2025 – Present | Amritsar, Punjab",
+      date: "July 2024 – Present | Noida, Uttar Pradesh, India",
       description: [
-        "Led development of new internal workflow improving Sales-CSM coordination",
-        "Technical bridge for product architecture and deployment consultation",
-        "Created automated systems for lead and customer touchpoint tracking",
-        "Conducted technical product demos emphasizing backend capabilities"
+        "Manage DevOps for company applications, including CI/CD pipelines, deployment processes, and environment configuration",
+        "Perform daily debugging, testing, bug tracking, and issue resolution to ensure app reliability and stability",
+        "Support application development cycles with backend coordination and technical troubleshooting",
+        "Oversee internal operations across all teams, ensuring streamlined workflows and accountability"
+      ]
+    },
+    {
+      icon: BriefcaseIcon,
+      title: "Sales Engineer",
+      company: "WellnessZ",
+      date: "January 2024 – July 2024 | Punjab, India",
+      description: [
+        "Responsible for sales activities, including cold calling, product demonstrations, and customer success management (CSM)",
+        "Engaging with potential clients to drive product adoption and ensure a seamless customer experience"
       ]
     },
     {
       icon: Code,
       title: "Freelance Web Developer",
       company: "Self-Employed",
-      date: "Jan 2023 – Present | Remote",
+      date: "January 2023 – Present | Remote",
       description: [
-        "Delivered 100+ high-quality websites/web apps across industries",
-        "Increased client conversions by 30-40% through impactful websites",
-        "Full-stack development using React, Spring Boot, MySQL, and more",
-        "Managed end-to-end development cycles and client relationships",
-        "Completed urgent projects within 24-48 hours consistently"
+        "Developed and maintained websites for various clients using HTML, CSS, JavaScript, React, WordPress, and Wix",
+        "Managed multiple projects simultaneously, ensuring timely delivery and client satisfaction",
+        "Designed and implemented backend solutions using Spring Boot and Flask, integrating databases like MySQL",
+        "Collaborated with clients to gather requirements, provide updates, and implement feedback",
+        "Gained experience in cybersecurity through projects involving Kali Linux, performing passive reconnaissance",
+        "Demonstrated ability to deliver high-quality work under tight deadlines, often completing projects within a day"
       ]
     }
   ];

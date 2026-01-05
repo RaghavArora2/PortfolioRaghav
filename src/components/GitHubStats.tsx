@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import GitHubCalendar from 'react-github-calendar';
 import { Github, Star, GitFork, Code2 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const GitHubStats = () => {
+  const { isDark } = useTheme();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -89,17 +91,24 @@ const GitHubStats = () => {
           <h3 className="text-xl sm:text-2xl font-bold text-white/90 dark:text-white/90 mb-4 sm:mb-6 text-center">
             Contribution Activity
           </h3>
-          <div className="flex justify-center overflow-x-auto">
-            <GitHubCalendar
-              username="RaghavArora2"
-              colorScheme="dark"
-              fontSize={12}
-              blockSize={12}
-              theme={{
-                dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-              }}
-            />
+          <div className="flex justify-center overflow-x-auto p-4">
+            <div style={{ minWidth: '100%', display: 'flex', justifyContent: 'center' }}>
+              <GitHubCalendar
+                username="RaghavArora2"
+                colorScheme="dark"
+                fontSize={14}
+                blockSize={14}
+                blockMargin={5}
+                weekStart={1}
+                theme={{
+                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
+                style={{ 
+                  color: '#ffffff',
+                  width: '100%'
+                }}
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -111,11 +120,16 @@ const GitHubStats = () => {
             viewport={{ once: true }}
             className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-white/10"
           >
+            <h3 className="text-lg font-bold text-white/90 mb-3 text-center">GitHub Statistics</h3>
             <img
-              src="https://github-readme-stats.vercel.app/api?username=RaghavArora2&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&icon_color=a855f7&text_color=ffffff"
+              src={`https://github-readme-stats.vercel.app/api?username=RaghavArora2&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&icon_color=a855f7&text_color=ffffff&include_all_commits=true&count_private=true&cache_seconds=3600`}
               alt="GitHub Stats"
               className="w-full rounded-lg"
               loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = `https://github-readme-stats.vercel.app/api?username=RaghavArora2&show_icons=true&theme=dark&hide_border=true&bg_color=0d1117&title_color=a855f7&icon_color=a855f7&text_color=ffffff`;
+              }}
             />
           </motion.div>
           <motion.div 
@@ -124,14 +138,39 @@ const GitHubStats = () => {
             viewport={{ once: true }}
             className="bg-white/5 dark:bg-white/5 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-white/10"
           >
+            <h3 className="text-lg font-bold text-white/90 mb-3 text-center">Top Languages</h3>
             <img
-              src="https://github-readme-stats.vercel.app/api/top-langs/?username=RaghavArora2&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&text_color=ffffff"
+              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=RaghavArora2&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=a855f7&text_color=ffffff&langs_count=8&cache_seconds=3600`}
               alt="Top Languages"
               className="w-full rounded-lg"
               loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = `https://github-readme-stats.vercel.app/api/top-langs/?username=RaghavArora2&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&title_color=a855f7&text_color=ffffff`;
+              }}
             />
           </motion.div>
         </div>
+        
+        {/* Additional GitHub Stats */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-6 bg-white/5 dark:bg-white/5 backdrop-blur-sm p-3 sm:p-4 rounded-xl shadow-lg border border-white/10"
+        >
+          <h3 className="text-lg font-bold text-white/90 mb-3 text-center">GitHub Streak</h3>
+          <img
+            src={`https://github-readme-streak-stats.demolab.com/?user=RaghavArora2&theme=radical&hide_border=true&background=0d1117&ring=a855f7&fire=a855f7&currStreakLabel=a855f7&cache_seconds=3600`}
+            alt="GitHub Streak"
+            className="w-full rounded-lg"
+            loading="lazy"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+            }}
+          />
+        </motion.div>
       </div>
     </section>
   );

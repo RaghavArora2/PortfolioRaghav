@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,8 +67,6 @@ const Navbar = () => {
         </motion.div>
 
         <div className="flex items-center gap-4">
-          <ThemeToggle />
-          
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white/80 hover:text-white transition-colors p-2"

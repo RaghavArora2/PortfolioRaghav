@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Users, MessageSquare, BriefcaseIcon, Clock, Handshake, Brain, Target, Zap } from 'lucide-react';
+import { Users, MessageSquare, BriefcaseIcon, Clock, Handshake, Brain, Target, Zap, Award, TrendingUp, Network } from 'lucide-react';
 import { FaJava, FaReact, FaNodeJs, FaDocker, FaAws, FaWordpress, FaHtml5, FaCss3 } from 'react-icons/fa';
 import { SiSpringboot, SiMongodb, SiPostman, SiWix, SiKalilinux, SiJavascript, SiMysql, SiExpress } from 'react-icons/si';
 
@@ -127,6 +127,53 @@ const Skills = () => {
           <p className="text-white/70 dark:text-white/70 text-sm sm:text-base lg:text-lg px-4">
             Mastering cutting-edge technologies across the digital cosmos
           </p>
+        </motion.div>
+
+        {/* Top Skills Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 sm:mb-16"
+        >
+          <h3 className="text-xl sm:text-2xl font-bold text-white/90 dark:text-white/90 mb-6 sm:mb-8 text-center">
+            Top Skills
+            <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto mt-2" />
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+              className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-purple-500/25 transition-all border border-purple-500/30 text-center"
+            >
+              <MessageSquare className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+              <h4 className="text-white font-bold text-lg mb-2">Client Communication</h4>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -5 }}
+              className="bg-gradient-to-br from-pink-500/20 to-pink-600/20 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-pink-500/25 transition-all border border-pink-500/30 text-center"
+            >
+              <TrendingUp className="w-8 h-8 text-pink-400 mx-auto mb-3" />
+              <h4 className="text-white font-bold text-lg mb-2">Project Management</h4>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              whileHover={{ y: -5 }}
+              className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-blue-500/25 transition-all border border-blue-500/30 text-center"
+            >
+              <Network className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+              <h4 className="text-white font-bold text-lg mb-2">System Architecture</h4>
+            </motion.div>
+          </div>
         </motion.div>
         
         <motion.div 

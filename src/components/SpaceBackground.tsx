@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 const SpaceBackground = () => {
+  const { isDark } = useTheme();
   // Drastically reduced elements for performance
   const stars = useMemo(() => 
     Array.from({ length: 20 }, (_, i) => ({
@@ -38,7 +40,11 @@ const SpaceBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Simplified gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-black" />
+      <div className={`absolute inset-0 ${
+        isDark 
+          ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-black' 
+          : 'bg-gradient-to-br from-gray-100 via-purple-50 to-white'
+      }`} />
       
       {/* Reduced nebula effects */}
       <div className="absolute inset-0 opacity-20">

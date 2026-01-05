@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, Award, BookOpen, Rocket, Code, Heart } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, Rocket, Code, Heart, Certificate } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -123,20 +123,19 @@ const About = () => {
           >
             <div className="prose prose-lg max-w-none">
               <p className="text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
-                A proactive and versatile engineering student at <span className="font-semibold text-purple-400">Guru Nanak Dev University</span> (B.Tech in CSE, 2021–2025), 
-                with a solid foundation in software development and a strong inclination towards backend engineering, 
-                web development, and data visualization.
+                I'm a <span className="font-semibold text-purple-400">Tech Lead</span> managing web, app, and UI/UX teams at <span className="font-semibold text-pink-400">WellnessZ</span>. 
+                I work closely with high-value clients, translate requirements into technical plans, and drive end-to-end execution 
+                across development, DevOps, and product delivery.
               </p>
               
               <p className="text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg mb-4">
-                Experienced in <span className="font-semibold text-pink-400">freelance web development</span>, technical consulting, and handling multiple full-cycle projects. 
-                I'm currently working as a <span className="font-semibold text-blue-400">Sales Engineer Intern at WellnessZ</span>, where I introduced a new technical 
-                coordination workflow to streamline collaboration between the Sales and CSM teams.
+                With a background of serving <span className="font-semibold text-blue-400">100+ clients as a freelancer</span>, I 
+                bring strong technical skills, fast problem-solving, and clear communication. I focus on building scalable systems using 
+                React, Next.js, Node.js, Redis, MongoDB, Docker, and AWS.
               </p>
 
               <p className="text-white/80 leading-relaxed text-sm sm:text-base lg:text-lg">
-                My journey is driven by a passion for solving complex problems and creating impactful digital experiences 
-                that bridge the gap between technology and human needs across the digital cosmos.
+                Passionate about leading teams, improving processes, and building impactful digital products.
               </p>
             </div>
           </motion.div>
@@ -152,27 +151,50 @@ const About = () => {
               <EducationCard
                 icon={GraduationCap}
                 school="Guru Nanak Dev University, Amritsar"
-                degree="BTech Computer Science Engineering"
-                year="2021–2025"
+                degree="Bachelor of Technology - BTech, Computer Science"
+                year="2021 - 2025"
                 index={0}
-              />
-              <EducationCard
-                icon={Award}
-                school="Madhav Vidya Niketan, Amritsar"
-                degree="12th Standard - Science Stream"
-                year="2019–2021"
-                index={1}
-              />
-              <EducationCard
-                icon={BookOpen}
-                school="GD Goenka Public School"
-                degree="10th Standard"
-                year="2017–2019"
-                index={2}
               />
             </div>
           </motion.div>
         </div>
+
+        {/* Certifications Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 sm:mt-16"
+        >
+          <h3 className="text-2xl sm:text-3xl font-bold text-white/90 mb-6 sm:mb-8 text-center">
+            <Certificate className="inline-block mr-3 text-purple-400" />
+            Certifications
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {[
+              'CSS Certificate',
+              'Software Engineer Certificate',
+              'Java (Basic) Certificate',
+              'SQL (Basic) Certificate',
+              'Software Engineer Intern Certificate'
+            ].map((cert, index) => (
+              <motion.div
+                key={cert}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition-all border border-white/10 flex items-center gap-4"
+              >
+                <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl border border-purple-500/30">
+                  <Award className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                </div>
+                <p className="text-white/90 font-semibold text-sm sm:text-base">{cert}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
