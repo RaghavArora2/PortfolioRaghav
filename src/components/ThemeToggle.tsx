@@ -1,5 +1,3 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -7,36 +5,13 @@ const ThemeToggle = () => {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <motion.button
+    <button
       onClick={toggleTheme}
-      className="relative p-3 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg hover:shadow-purple-500/25 transition-all"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.5 }}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink transition-colors duration-150 hover:bg-accent-weak"
     >
-      <motion.div
-        className="relative w-5 h-5"
-        animate={{ rotate: isDark ? 180 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      >
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          animate={{ opacity: isDark ? 0 : 1, scale: isDark ? 0.5 : 1 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Sun className="w-5 h-5 text-yellow-400" />
-        </motion.div>
-        <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          animate={{ opacity: isDark ? 1 : 0, scale: isDark ? 1 : 0.5 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Moon className="w-5 h-5 text-purple-400" />
-        </motion.div>
-      </motion.div>
-    </motion.button>
+      {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+    </button>
   );
 };
 

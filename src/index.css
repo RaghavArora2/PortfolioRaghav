@@ -2,14 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  :root {
+    --color-canvas: 255 255 255;
+    --color-surface: 246 248 250;
+    --color-elevated: 255 255 255;
+    --color-ink: 26 31 54;
+    --color-body: 60 66 87;
+    --color-muted: 105 115 134;
+    --color-border: 227 232 238;
+    --color-accent: 37 99 235;
+    --color-accent-hover: 29 79 215;
+    --color-accent-weak: 238 243 255;
+    --color-success: 26 130 69;
+    --color-focus: 37 99 235;
+    --shadow-rgb: 26 31 54;
+  }
+
+  .dark {
+    --color-canvas: 10 14 26;
+    --color-surface: 17 23 38;
+    --color-elevated: 21 27 44;
+    --color-ink: 247 250 252;
+    --color-body: 194 202 214;
+    --color-muted: 138 147 166;
+    --color-border: 34 42 61;
+    --color-accent: 123 140 255;
+    --color-accent-hover: 147 161 255;
+    --color-accent-weak: 26 33 56;
+    --color-success: 63 185 80;
+    --color-focus: 123 140 255;
+    --shadow-rgb: 0 0 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-body font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display text-ink;
+  }
+
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  ::selection {
+    @apply bg-accent-weak text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-focus));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
-body {
-  @apply text-gray-800 antialiased;
+@layer utilities {
+  .bg-dot-grid {
+    background-image: radial-gradient(rgb(var(--color-ink) / 0.05) 1px, transparent 1.5px);
+    background-size: 24px 24px;
+  }
 }
 
-::selection {
-  @apply bg-blue-200;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

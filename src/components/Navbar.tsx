@@ -1,130 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import Container from './ui/Container';
+import Button from './ui/Button';
+import ThemeToggle from './ThemeToggle';
+import { NAV_LINKS, RESUME_URL } from '../lib/site';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setScrolled(scrollPosition > 50);
-      
-      const sections = document.querySelectorAll('section[id]');
-      const scrollPos = scrollPosition + 100; // Adjusted offset
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id') || '';
-        
-        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-          setActiveSection(sectionId);
+      setScrolled(window.scrollY > 50);
+      const scrollPos = window.scrollY + 100;
+      document.querySelectorAll('section[id]').forEach((section) => {
+        const el = section as HTMLElement;
+        if (scrollPos >= el.offsetTop && scrollPos < el.offsetTop + el.clientHeight) {
+          setActiveSection(el.id);
         }
       });
     };
-
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   const scrollTo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const navHeight = 80;
-      const elementPosition = element.offsetTop - navHeight;
-      window.scrollTo({ 
-        top: elementPosition, 
-        behavior: 'smooth' 
-      });
+    const el = document.getElementById(id);
+    if (el) {
+      window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
       setIsOpen(false);
     }
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 py-3 px-4 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-black/80 dark:bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
-          : 'bg-transparent'
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? 'border-b border-hairline bg-canvas/85 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="flex items-center gap-2 cursor-pointer"
+      <Container className="flex h-16 items-center justify-between">
+        <button
           onClick={() => scrollTo('hero')}
+          className="font-display text-lg font-bold tracking-tight text-ink"
         >
-          <Sparkles className="w-6 h-6 text-purple-400" />
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-            Raghav Arora
-          </h1>
-        </motion.div>
+          Raghav Arora
+        </button>
 
-        <div className="flex items-center gap-4">
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white/80 hover:text-white transition-colors p-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X /> : <Menu />}
-          </button>
-
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-6">
-            {['about', 'skills', 'experience', 'projects', 'contact'].map((item) => (
-              <motion.li
-                key={item}
-                whileHover={{ scale: 1.05 }}
-                className="cursor-pointer"
-              >
-                <button
-                  onClick={() => scrollTo(item)}
-                  className={`capitalize transition-all duration-300 relative px-3 py-2 rounded-lg ${
-                    activeSection === item
-                      ? 'text-purple-400 font-medium bg-purple-500/10'
-                      : 'text-white/70 hover:text-purple-300 hover:bg-white/5'
-                  }`}
-                >
-                  {item}
-                </button>
-              </motion.li>
-            ))}
-          </ul>
+        <div className="hidden items-center gap-1 md:flex">
+          {NAV_LINKS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                activeSection === item.id ? 'text-ink' : 'text-muted hover:text-ink'
+              }`}
+            >
+              {item.label}
+              {activeSection === item.id && (
+                <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-accent" />
+              )}
+            </button>
+          ))}
         </div>
 
-        {/* Mobile Menu */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
-          className={`${
-            isOpen ? 'block' : 'hidden'
-          } absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl shadow-2xl md:hidden border-t border-white/10`}
-        >
-          <ul className="px-4 py-2">
-            {['about', 'skills', 'experience', 'projects', 'contact'].map((item) => (
-              <li key={item}>
-                <button
-                  onClick={() => scrollTo(item)}
-                  className={`block w-full text-left py-3 px-4 capitalize transition-all duration-300 rounded-lg ${
-                    activeSection === item
-                      ? 'text-purple-400 font-medium bg-purple-500/10'
-                      : 'text-white/70 hover:text-purple-300 hover:bg-white/5'
-                  }`}
-                >
-                  {item}
-                </button>
-              </li>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div className="hidden md:block">
+            <Button href={RESUME_URL} external>
+              Résumé
+            </Button>
+          </div>
+          <button
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink md:hidden"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </Container>
+
+      {isOpen && (
+        <div className="border-t border-hairline bg-canvas md:hidden">
+          <Container className="flex flex-col py-4">
+            {NAV_LINKS.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`py-3 text-left text-base font-medium ${
+                  activeSection === item.id ? 'text-ink' : 'text-muted'
+                }`}
+              >
+                {item.label}
+              </button>
             ))}
-          </ul>
-        </motion.div>
-      </div>
-    </motion.nav>
+            <div className="mt-3 border-t border-hairline pt-4">
+              <Button href={RESUME_URL} external fullWidth>
+                View Résumé
+              </Button>
+            </div>
+          </Container>
+        </div>
+      )}
+    </nav>
   );
 };
 
