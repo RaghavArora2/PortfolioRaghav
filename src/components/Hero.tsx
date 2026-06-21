@@ -104,7 +104,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
           >
             <motion.a
-              href="https://drive.google.com/file/d/1LKfT_xnzJSdKsMJ5BM9KyshecP0VzaTL/view?usp=sharing"
+              href="https://drive.google.com/file/d/1B8t1FmlP2BD6ci2UjjGyE97NgJFapKhR/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -156,7 +156,7 @@ const Hero = () => {
 
             <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl z-10 border-4 border-transparent" style={{ margin: '4px' }}>
               <img
-                src="https://media.licdn.com/dms/image/v2/D5603AQFoHJPecDoPLA/profile-displayphoto-scale_400_400/B56Zpyb8pAH8Ag-/0/1762856527099?e=1769040000&v=beta&t=DqY-HeYj-bwhaPCVbK4bMg09w9-oYHsCMbubrJqw9g0"
+                src="/profile.png"
                 alt="Raghav Arora"
                 className="w-full h-full object-cover"
                 loading="eager"

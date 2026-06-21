@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, Award, BookOpen, Rocket, Code, Heart, Certificate } from 'lucide-react';
+import { GraduationCap, Award, BookOpen, Rocket, Code, Heart, ScrollText } from 'lucide-react';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -167,7 +167,7 @@ const About = () => {
           className="mt-12 sm:mt-16"
         >
           <h3 className="text-2xl sm:text-3xl font-bold text-white/90 mb-6 sm:mb-8 text-center">
-            <Certificate className="inline-block mr-3 text-purple-400" />
+            <ScrollText className="inline-block mr-3 text-purple-400" />
             Certifications
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

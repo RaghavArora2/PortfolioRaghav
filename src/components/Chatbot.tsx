@@ -56,7 +56,7 @@ const Chatbot = () => {
     const input = userInput.toLowerCase();
 
     if (input.includes('resume') || input.includes('cv') || input.includes('download')) {
-      return "📄 You can download Raghav's resume here: https://drive.google.com/file/d/1LKfT_xnzJSdKsMJ5BM9KyshecP0VzaTL/view?usp=sharing\n\nIt includes all his technical skills, work experience, and project details!";
+      return "📄 You can download Raghav's resume here: https://drive.google.com/file/d/1B8t1FmlP2BD6ci2UjjGyE97NgJFapKhR/view?usp=sharing\n\nIt includes all his technical skills, work experience, and project details!";
     }
 
     if (input.includes('skill') || input.includes('technology') || input.includes('tech stack')) {
