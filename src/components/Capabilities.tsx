@@ -23,6 +23,18 @@ const GROUPS = [
     items: ['SQL', 'System Design', 'API Integrations', 'Redis', 'Database Design', 'Scalability'],
   },
   {
+    title: 'AI Systems & Automation',
+    items: [
+      'LLM Orchestration & Routing',
+      'RAG & Vector Search (pgvector)',
+      'Knowledge Graphs',
+      'AI Agents & Automation',
+      'Web Scraping Pipelines (Playwright)',
+      'Prompt Engineering',
+      'AI-Assisted Delivery (Claude, Cursor)',
+    ],
+  },
+  {
     title: 'Cloud & DevOps',
     items: ['AWS (EC2, S3)', 'Docker', 'CI/CD', 'Deployment Pipelines'],
   },

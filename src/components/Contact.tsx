@@ -24,6 +24,10 @@ const Contact = () => (
   >
     <Reveal>
       <p className="max-w-xl text-body">The fastest way to reach me is email or LinkedIn.</p>
+      <p className="mt-3 max-w-xl text-sm text-muted">
+        Also available for selective freelance: product delivery, ops automation, and custom AI
+        systems.
+      </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <Button href={`mailto:${CONTACT.email}`} size="lg">
           <Mail className="h-4 w-4" />

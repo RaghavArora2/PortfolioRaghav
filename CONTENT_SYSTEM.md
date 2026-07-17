@@ -130,7 +130,7 @@ All fixes applied. This is the copy to implement.
 - **Kicker:** TECHNICAL PROJECT MANAGER · STARTUP OPERATOR
 - **Headline:** Raghav Arora
 - **Subheadline:** Technical Project Manager at WellnessZ. I lead 12+ engineers across backend, frontend, mobile, QA, and DevOps to ship product for a platform serving 10k+ users.
-- **Body:** I grew from customer success and operations into technical project management — so I own delivery end to end and work directly with founders and enterprise clients.
+- **Body:** I grew from customer success and operations into technical project management — so I own delivery end to end and work directly with founders and enterprise clients. I also build the AI workflows and automation that keep delivery honest.
 - **Metrics (proof panel):** `12+` engineers led · `10k+` users · `25+` features shipped · `200+` deployments · `100+` apps delivered
 - **Availability tag:** Open to Technical Project Manager & Program Manager roles
 - **CTA:** Primary `View Résumé` · Secondary `Get in touch`
@@ -160,7 +160,7 @@ All fixes applied. This is the copy to implement.
 ### About
 - **Headline:** From the front lines to delivery leadership
 - **Subheadline:** A technical project manager who grew up through the business.
-- **Body:** My path ran from business development to customer success to operations to technical project management. That arc means I lead delivery with full business context — I understand the customer, the operation, and the engineering it takes to ship. At WellnessZ I coordinate cross-functional teams, align roadmaps with founders and enterprise clients, and keep delivery reliable in a fast-paced startup.
+- **Body:** My path ran from business development to customer success to operations to technical project management. That arc means I lead delivery with full business context — I understand the customer, the operation, and the engineering it takes to ship. At WellnessZ I coordinate cross-functional teams, align roadmaps with founders and enterprise clients, and keep delivery reliable in a fast-paced startup. When a process is worth automating, I build the tool rather than wait for one.
 - **Career arc:** BDE → Customer Success → Operations → Technical Project Manager
 - **Pillars:**
   - **Delivery Ownership** — 25+ features shipped end-to-end
@@ -204,29 +204,69 @@ All fixes applied. This is the copy to implement.
   - **Program & Project Management** — Stakeholder Management · Requirement Gathering · Requirements Documentation · Agile Delivery · Sprint Planning · Roadmapping · Cross-Functional Leadership
   - **Operations & Process Improvement** — SOP Creation · Escalation Management · Workflow Automation · Incident Management
   - **Technical Foundations** — SQL · System Design · API Integrations · Redis · Database Design · Scalability
+  - **AI Systems & Automation** — LLM Orchestration & Routing · RAG & Vector Search (pgvector) · Knowledge Graphs · AI Agents & Automation · Web Scraping Pipelines (Playwright) · Prompt Engineering · AI-Assisted Delivery (Claude, Cursor)
   - **Cloud & DevOps** — AWS (EC2, S3) · Docker · CI/CD · Deployment Pipelines
   - **Tools** — Git · Postman · MongoDB
 - **CTA:** (none)
+- **Traceability note (AI Systems & Automation):** This group is **not** from the résumé SOT — it is backed by the four live featured systems (Zara/God’s Brain, Commit OS, Job Hunter, LinkedIn Growth AI). Each item maps to a shipped system: LLM routing + RAG + knowledge graphs (Zara, Commit OS), scraping pipelines (Job Hunter), agents/automation (Zara laptop agent), AI-assisted delivery (built with Claude + Cursor). Presented as capability demonstrated by real work, not a résumé keyword.
 
 ### Selected Work
-- **Headline:** Selected work
-- **Subheadline:** Delivery in practice.
-- **Body:**
+- **Headline:** Systems I’ve shipped to remove pain
+- **Subheadline:** I don’t collect side projects. I build operating systems for problems that waste my time — then productize the pattern.
+- **Structure (each item answers: Pain → System → How it works → Why it matters (hiring manager + client) → Proof):**
+
+  **Flagship — Zara / God’s Brain** *(lead)*
+  - **Pain:** Context dies across WhatsApp, meetings, email, and notes; cloud chatbots can’t act on your actual machine, and “I’ll remember that” never becomes a task.
+  - **System:** A private AI second brain + companion (Zara) — not a chatbot in a tab. Captures notes/voice/email/meetings, answers from *my* data with citations, and acts across web, Telegram, and a laptop agent.
+  - **How it works:** Capture → embeddings + knowledge graph (Postgres/pgvector) → FastAPI core reasons with hybrid search → laptop agent handles browser, files, lock, screenshots. Suite embeds Commit OS + Job Hunter. Budget: ~$1/mo API class + small EC2.
+  - **Why it matters:** *Hiring manager* — systems thinking, product ownership, ops discipline. *Client* — real, end-to-end AI architecture, not a demo.
+  - **Stack:** Python/FastAPI · Postgres + pgvector · Next.js · OpenAI + Gemini · Telegram · laptop agent · AWS EC2 · Caddy.
+  - **Proof:** Live [godsbrain.duckdns.org](https://godsbrain.duckdns.org) (tagline “She remembers, so you can think”; sign-in gated) · Telegram [@GodsBrainBot](https://t.me/GodsBrainBot) (public). Repo private — **no code link presented** (verified 404 on public GitHub).
+
+  **Commit OS**
+  - **Pain:** Almost every important commitment lives inside a conversation — then quietly gets forgotten.
+  - **System:** A personal AI OS that syncs WhatsApp via a local agent, extracts commitments with AI, and builds a searchable knowledge base with tasks + morning briefs.
+  - **How it works:** Messages are the immutable source of truth; tasks/knowledge are regeneratable, derived artifacts. Privacy by design — sync runs locally.
+  - **Why it matters:** Turns messy human communication into reliable execution; reusable inbox-to-action pattern for clients.
+  - **Stack:** Next.js · Fastify · Prisma · Postgres + pgvector · Playwright · Gemini.
+  - **Proof/status:** **Live** in the God’s Brain suite → [godsbrain.duckdns.org/commitos](https://godsbrain.duckdns.org/commitos) (sign-in required; deployed on EC2 behind Caddy, WhatsApp sync-agent on laptop). Repo private (404) → no code link.
+
+  **Job Hunter AI**
+  - **Pain:** Job search is noisy, manual, and biased toward spray-and-pray.
+  - **System:** Multi-board scraper (YC, Wellfound, Naukri, LinkedIn) + hybrid rule/AI scoring + shortlist diversity + application tracker with feedback learning + résumé tailoring from a master LaTeX.
+  - **How it works:** Rules pre-screen, AI re-ranks; tracker learns from feedback; tailoring never invents experience.
+  - **Why it matters:** *Hiring manager* — operator who automates his own ops. *Client* — reusable scraping + ranking + CRM-style tracking.
+  - **Stack:** Python · FastAPI · Playwright · React/Vite · Gemini + OpenAI · LaTeX.
+  - **Proof/status:** **Live** in the God’s Brain suite → [godsbrain.duckdns.org/job-hunter](https://godsbrain.duckdns.org/job-hunter/) (sign-in required; API on EC2, scrapers on laptop). No public repo remote.
+
+  **LinkedIn Growth AI**
+  - **Pain:** Personal brand growth is inconsistent, generic, and easy to fake.
+  - **System:** Content-ops pipeline — research → opportunity finding → scoring → post generation → hashtags/SEO → preview → publish.
+  - **How it works:** Credibility over virality; builder tone from a real knowledge base; never fabricates achievements.
+  - **Why it matters:** Repeatable content operations for founders/operators who hate posting.
+  - **Stack:** FastAPI · SQLAlchemy · React · Vite · Gemini/OpenRouter.
+  - **Proof/status:** Private · architecture case study. No public link.
+
+- **Delivery at scale (professional anchor, retained):**
   - **White-label platform delivery (WellnessZ).** Oversaw delivery, deployment, and operational support for 100+ white-label web and mobile applications across healthcare and wellness.
   - **Independent client delivery (Freelance).** Delivered 100+ websites and applications across healthcare, wellness, retail, and local business, owning requirements through launch.
+- **Earlier work (archive, no visual weight):** Video Chat App · Crypto Trading UI · Market Dashboard · AvedhaneAnuchintan — kept as low-weight text links only.
+- **Preview images:** Each live system shows a framed screenshot thumbnail captured from its own public landing/dashboard (`public/work/zara.png`, `commitos.png`, `job-hunter.png` — 917×598, scrollbar hidden at capture). LinkedIn Growth AI has no deployment → no image. Replace the files in `public/work/` to refresh visuals; no code change needed.
 - **CTA:** `View GitHub`
-- **[NEEDS VERIFICATION]:** If specific named projects are to be featured, provide verified title, role, stack, and outcome for each. None are listed in SOURCE_OF_TRUTH.md, so none are fabricated here.
+- **Link honesty rule:** No GitHub links are shown for the four featured systems — `RaghavArora2/SecondBrain` and `RaghavArora2/CommitOS` return 404 (private), and Job Hunter / LinkedIn Growth have no public remote. **Live-deployment links are shown only where verified 200:** Zara (`godsbrain.duckdns.org`), Commit OS (`/commitos`), and Job Hunter (`/job-hunter/`) are all live in the God’s Brain suite on EC2 behind Caddy. LinkedIn Growth AI has no deployment → stays “private / architecture case study.”
 
 ### Contact
 - **Headline:** Let's talk about delivery and operations
 - **Subheadline:** Open to Technical Project Manager and Program Manager roles.
 - **Body:** The fastest way to reach me is email or LinkedIn.
+- **Secondary line:** Also available for selective freelance: product delivery, ops automation, and custom AI systems.
 - **Contact data:** raghavarora419@gmail.com · +91 9815919243 · linkedin.com/in/raghavarora2003 · github.com/RaghavArora2 · Amritsar, Punjab, India
 - **CTA:** Primary `Email Raghav` · Secondary `Connect on LinkedIn`
 
 ### Footer
 - **Headline:** Raghav Arora — Technical Project Manager
 - **Body:** Amritsar, Punjab, India · Open to TPM, Program Manager, Startup Operator, and Product Operations roles.
+- **Secondary line:** Also available for selective freelance — product delivery, ops automation, and custom AI systems.
 - **Links:** Email · LinkedIn · GitHub · Résumé (PDF)
 - **CTA:** `Back to top`
 
@@ -249,3 +289,18 @@ All fixes applied. This is the copy to implement.
 | Contact | résumé header (phone, email, LinkedIn, GitHub) |
 
 Anything not in this table is **not** stated as fact anywhere in the copy.
+
+---
+
+## PART 5 — Featured Work Source Map (audit trail)
+
+Featured systems are sourced from the sibling repos under `d:/Projects/`, not from `SOURCE_OF_TRUTH.md` (which is résumé-only). Copy describes verified capability; no live usage metrics are claimed.
+
+| Project | Repo (local) | Source docs | Public link presented | Notes |
+|---|---|---|---|---|
+| Zara / God’s Brain | `2nd Brain/` | `README.md`, `PROJECT.md`, `ARCHITECTURE.md`, `DEMO.md`, `COST.md`, `Caddyfile` | Live `godsbrain.duckdns.org` (200, sign-in gated) + Telegram `@GodsBrainBot` | GitHub `RaghavArora2/SecondBrain` = 404 (private) → no code link. OpenAI primary · Gemini fallback · local bge-small embeddings · faster-whisper STT |
+| Commit OS | `Commit OS/` | `README.md`, `2nd Brain/Caddyfile`, `PROJECT.md` | Live `godsbrain.duckdns.org/commitos` (200, sign-in) | Hosted in the suite (`commit-os-web:3003` / `commit-os-api:3002` behind Caddy); WhatsApp sync-agent on laptop. GitHub `RaghavArora2/CommitOS` = 404 (private) |
+| Job Hunter AI | `job-hunter-ai/` | `ROADMAP.md`, `scraper/`, `scorer/`, `frontend/package.json`, `2nd Brain/Caddyfile` | Live `godsbrain.duckdns.org/job-hunter/` (200) | Hosted in the suite (`job-hunter-web:80` / `job-hunter:8000` behind Caddy); scrapers on laptop. Frontend = React/Vite/Tailwind. No git remote |
+| LinkedIn Growth AI | `LinkedinPipeline/` | `README.md` | None | Not deployed in the suite; no git remote → “architecture case study” status only |
+
+**Link-honesty rule:** present a GitHub link only for a public repo (none of the four qualify), and a live link only where the URL returns 200. Verified 2026-07 via HTTP status checks (`curl`), `git remote`, and the suite `Caddyfile` routes.

@@ -12,6 +12,10 @@ const Footer = () => {
           <p className="font-display font-bold text-ink">Raghav Arora — Technical Project Manager</p>
           <p className="mt-1 text-sm text-muted">{CONTACT.location}</p>
           <p className="mt-1 text-sm text-muted">Open to {ROLES_OPEN_TO} roles.</p>
+          <p className="mt-1 text-sm text-muted">
+            Also available for selective freelance — product delivery, ops automation, and custom AI
+            systems.
+          </p>
         </div>
 
         <div className="flex flex-col items-start gap-3 sm:items-end">

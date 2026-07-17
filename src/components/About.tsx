@@ -43,7 +43,8 @@ const About = () => {
               project management. That arc means I lead delivery with full business context — I
               understand the customer, the operation, and the engineering it takes to ship. At
               WellnessZ I coordinate cross-functional teams, align roadmaps with founders and
-              enterprise clients, and keep delivery reliable in a fast-paced startup.
+              enterprise clients, and keep delivery reliable in a fast-paced startup. When a process
+              is worth automating, I build the tool rather than wait for one.
             </p>
           </Reveal>
 

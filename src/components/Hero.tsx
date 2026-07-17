@@ -53,7 +53,8 @@ const Hero = () => {
             <Reveal delay={0.15}>
               <p className="mt-4 max-w-xl leading-relaxed text-muted">
                 I grew from customer success and operations into technical project management — so I
-                own delivery end to end and work directly with founders and enterprise clients.
+                own delivery end to end and work directly with founders and enterprise clients. I
+                also build the AI workflows and automation that keep delivery honest.
               </p>
             </Reveal>
 
