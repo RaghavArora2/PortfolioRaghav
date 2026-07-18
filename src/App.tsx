@@ -8,6 +8,7 @@ import ImpactMetrics from './components/ImpactMetrics';
 import Navbar from './components/Navbar';
 import SelectedWins from './components/SelectedWins';
 import SelectedWork from './components/SelectedWork';
+import ZaraPanel from './components/zara/ZaraPanel';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <ZaraPanel />
       </div>
     </ThemeProvider>
   );

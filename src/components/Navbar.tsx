@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, Sparkles, X } from 'lucide-react';
 import Container from './ui/Container';
 import Button from './ui/Button';
 import ThemeToggle from './ThemeToggle';
 import { NAV_LINKS, RESUME_URL } from '../lib/site';
+import { openPortfolioZara } from '../lib/zaraClient';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,6 +73,14 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openPortfolioZara}
+            className="hidden h-10 items-center gap-2 rounded-md border border-hairline px-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:bg-accent-weak sm:inline-flex"
+          >
+            <Sparkles className="h-4 w-4 text-accent" />
+            Ask Zara
+          </button>
           <ThemeToggle />
           <div className="hidden md:block">
             <Button href={RESUME_URL} external>
@@ -85,6 +94,14 @@ const Navbar = () => {
             aria-expanded={isOpen}
           >
             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+          <button
+            type="button"
+            onClick={openPortfolioZara}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-accent sm:hidden"
+            aria-label="Ask Portfolio Zara"
+          >
+            <Sparkles className="h-5 w-5" />
           </button>
         </div>
       </Container>

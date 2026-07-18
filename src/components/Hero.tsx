@@ -1,9 +1,10 @@
-import { Download, ArrowDown } from 'lucide-react';
+import { Download, ArrowDown, Sparkles } from 'lucide-react';
 import Container from './ui/Container';
 import Button from './ui/Button';
 import Reveal from './ui/Reveal';
 import CountUp from './ui/CountUp';
 import { RESUME_URL } from '../lib/site';
+import { openPortfolioZara } from '../lib/zaraClient';
 
 const PROOF = [
   { value: '12+', label: 'engineers led' },
@@ -66,6 +67,10 @@ const Hero = () => {
                 </Button>
                 <Button variant="secondary" size="lg" onClick={() => scrollTo('contact')}>
                   Get in touch
+                </Button>
+                <Button variant="secondary" size="lg" onClick={openPortfolioZara}>
+                  <Sparkles className="h-4 w-4 text-accent" />
+                  Ask Zara
                 </Button>
               </div>
             </Reveal>
